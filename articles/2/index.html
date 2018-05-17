@@ -1,0 +1,361 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Coursera《机器学习》学习笔记（二）：神经网络篇 | _kawaiiQ&#39;s blog</title>
+
+  
+  <meta name="author" content="_kawaiiQ">
+  
+
+  
+  <meta name="description" content="&amp;#x8FD9;&amp;#x4E00;&amp;#x7BC7;&amp;#x662F;&amp;#x300A;&amp;#x673A;&amp;#x5668;&amp;#x5B66;&amp;#x4E60;&amp;#x300B;&amp;#x7B2C;&amp;#x56DB;&amp;#x5468;&amp;#x5230;&amp;#x7B2C;&amp;#x4E94;&amp;#x5468;&amp;#x77E5;&amp;#x8BC6;&amp;#x70B9;&amp;#x7684;&amp;#x603B;&amp;#x7ED3;&amp;#xFF0C;&amp;#x4E3B;&amp;#x8981;&amp;#x56F4;&amp;#x7ED5;&amp;#x795E;&amp;#x7ECF;&amp;#x7F51;&amp;#x7EDC;&amp;#x5C55;&amp;#x5F00;&amp;#x3002;
+&amp;#x524D;&amp;#x9762;&amp;#x8BF4;&amp;#x5230;&amp;#xFF0C;&amp;#x5728;&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#x4E0E;&amp;#x903B;&amp;#x8F91;&amp;#x56DE;&amp;#x5F52;&amp;#x4E2D;&amp;#xFF0C;&amp;#x60F3;&amp;#x8981;&amp;#x83B7;&amp;#x5F97;&amp;#x826F;&amp;#x597D;&amp;#x7684;&amp;#x9884;&amp;#x6D4B;&amp;#x6548;&amp;#x679C;&amp;#xFF0C;&amp;#x5C31;&amp;#x9700;&amp;#x8981;&amp;#x4E00;&amp;#x4E2A;&amp;#x597D;&amp;#x7684;&amp;#x5047;&amp;#x8BBE;&amp;#x51FD;&amp;#x6570;&amp;#x7684;&amp;#x5F62;&amp;#x5F0F;&amp;#x3002;&amp;#x800C;&amp;#x4E3A;&amp;#x4E86;&amp;#x6709;&amp;#x4E00;&amp;#x4E2A;&amp;#x597D;&amp;#x7684;&amp;#x5F62;&amp;#x5F0F;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x5C31;&amp;#x9700;&amp;#x8981;&amp;#x5148;&amp;#x5BF9;&amp;#x89E3;&amp;#x51B3;&amp;#x95EE;&amp;#x9898;&amp;#x7684;&amp;#x6A21;&amp;#x578B;&amp;#x6709;&amp;#x4E00;&amp;#x4E2A;&amp;#x521D;&amp;#x6B65;&amp;#x7684;&amp;#x4F30;&amp;#x8BA1;&amp;#x3002;&amp;#x90A3;&amp;#x8FD9;&amp;#x5C31;&amp;#x6709;&amp;#x4E00;&amp;#x4E2A;&amp;#x6BD4;&amp;#x8F83;&amp;#x5C34;&amp;#x5C2C;&amp;#x7684;&amp;#x60C5;&amp;#x51B5;&amp;#xFF1A;&amp;#x6211;&amp;#x4EEC;&amp;#x7528;&amp;#x673A;&amp;#x5668;&amp;#x5B66;&amp;#x4E60;&amp;#x662F;&amp;#x4E3A;&amp;#x4E86;&amp;#x83B7;&amp;#x5F97;&amp;#x89E3;&amp;#x51B3;&amp;#x95EE;&amp;#x9898;&amp;#x7684;&amp;#x6A21;&amp;#x578B;&amp;#xFF0C;&amp;#x800C;&amp;#x4E3A;&amp;#x4E86;&amp;#x8BA9;&amp;#x673A;&amp;#x5668;&amp;#x5B66;&amp;#x4E60;&amp;#x6709;&amp;#x597D;&amp;#x7684;&amp;#x6548;&amp;#x679C;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x53C8;&amp;#x9700;&amp;#x8981;&amp;#x5148;&amp;#x77E5;&amp;#x9053;&amp;#x89E3;&amp;#x51B3;&amp;#x95EE;&amp;#x9898;&amp;#x7684;&amp;#x6A21;&amp;#x578B;&amp;#x2026;&amp;#x2026;
+&amp;#x53E6;&amp;#x5916;&amp;#xFF0C;&amp;#x968F;&amp;#x7740;&amp;#x7279;&amp;#x5F81;&amp;#x7684;&amp;#x589E;&amp;#x52A0;&amp;#xFF0C;&amp;#x5982;&amp;#x679C;&amp;#x6211;&amp;#x4EEC;&amp;#x91C7;&amp;#x7528;&amp;#x591A;&amp;#x6B21;&amp;#x7684;&amp;#x51FD;&amp;#x6570;&amp;#xFF0C;&amp;#x90A3;&amp;#x4E48;&amp;#x591A;&amp;#x6B21;&amp;#x9879;&amp;#x7684;&amp;#x6570;&amp;#x91CF;&amp;#x4E5F;&amp;#x662F;&amp;#x4F1A;&amp;#x6307;&amp;#x6570;&amp;#x7EA7;&amp;#x7684;&amp;#x589E;&amp;#x52A0;&amp;#x3002;&amp;#x4F8B;&amp;#x5982;&amp;#xFF0C;&amp;#x5047;&amp;#x8BBE;&amp;#x67D0;&amp;#x4E2A;&amp;#x95EE;&amp;#x9898;&amp;#x6709;100&amp;#x4E2A;&amp;#x7279;&amp;#x5F81;&amp;#xFF0C;&amp;#x5982;&amp;#x679C;&amp;#x51FD;&amp;#x6570;&amp;#x5305;&amp;#x542B;&amp;#x6240;&amp;#x6709;&amp;#x7684;&amp;#x4E8C;&amp;#x6B21;&amp;#x9879;&amp;#xFF0C;&amp;#x90A3;&amp;#x5C06;&amp;#x4F1A;&amp;#x6709;&amp;#x591A;&amp;#x8FBE;5000&amp;#x4E2A;&amp;#x4E8C;&amp;#x6B21;&amp;#x9879;&amp;#xFF1B;&amp;#x800C;&amp;#x5982;&amp;#x679C;&amp;#x518D;&amp;#x5305;&amp;#x542B;&amp;#x4E09;&amp;#x6B21;&amp;#x9879;&amp;#xFF0C;&amp;#x5219;&amp;#x5C06;&amp;#x4F1A;&amp;#x6709;&amp;#x591A;&amp;#x8FBE;17000&amp;#x4E2A;&amp;#x4E09;&amp;#x6B21;&amp;#x9879;&amp;#x3002;&amp;#x5728;&amp;#x56FE;&amp;#x50CF;&amp;#x8BC6;&amp;#x522B;&amp;#x4E2D;&amp;#xFF0C;&amp;#x4E00;&amp;#x4E2A;$50 \times 50$&amp;#x50CF;&amp;#x7D20;&amp;#x7684;&amp;#x56FE;&amp;#x7247;&amp;#xFF0C;&amp;#x5982;&amp;#x679C;&amp;#x6BCF;&amp;#x4E2A;&amp;#x50CF;&amp;#x7D20;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x7279;&amp;#x5F81;&amp;#x7684;&amp;#x8BDD;&amp;#xFF0C;&amp;#x90FD;&amp;#x5C06;&amp;#x5305;&amp;#x542B;&amp;#x591A;&amp;#x8FBE;$50 \times 50 = 2500$&amp;#x4E2A;&amp;#x7279;&amp;#x5F81;&amp;#xFF0C;&amp;#x5982;&amp;#x679C;&amp;#x4F7F;&amp;#x7528;&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#x5EFA;&amp;#x7ACB;&amp;#x591A;&amp;#x9879;&amp;#x5F0F;&amp;#x7684;&amp;#x5047;&amp;#x8BBE;&amp;#x51FD;&amp;#x6570;&amp;#xFF0C;&amp;#x8BA1;&amp;#x7B97;&amp;#x91CF;&amp;#x662F;&amp;#x96BE;&amp;#x4EE5;&amp;#x60F3;&amp;#x8C61;&amp;#x7684;&amp;#x3002;
+&amp;#x800C;&amp;#x4F7F;&amp;#x7528;&amp;#x795E;&amp;#x7ECF;&amp;#x7F51;&amp;#x7EDC;&amp;#x5219;&amp;#x53EF;&amp;#x4EE5;&amp;#x5F88;&amp;#x597D;&amp;#x5730;&amp;#x89E3;&amp;#x51B3;&amp;#x8FD9;&amp;#x4E9B;&amp;#x590D;&amp;#x6742;&amp;#x7684;&amp;#x975E;&amp;#x7EBF;&amp;#x6027;&amp;#x5206;&amp;#x7C7B;&amp;#x95EE;&amp;#x9898;&amp;#xFF0C;&amp;#x800C;&amp;#x4E14;&amp;#x66F4;&amp;#x597D;&amp;#x7684;&amp;#x4E00;&amp;#x70B9;&amp;#x662F;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x4E0D;&amp;#x518D;&amp;#x9700;&amp;#x8981;&amp;#x50CF;&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#x4E0E;&amp;#x903B;&amp;#x8F91;&amp;#x56DE;&amp;#x5F52;&amp;#x4E00;&amp;#x6837;&amp;#x9700;&amp;#x8981;&amp;#x5148;&amp;#x6784;&amp;#x9020;&amp;#x5047;&amp;#x8BBE;&amp;#x51FD;&amp;#x6570;&amp;#x4E86;&amp;#x3002;">
+  
+
+  
+  
+  <meta name="keywords" content="Coursera,机器学习,神经网络">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Coursera《机器学习》学习笔记（二）：神经网络篇"/>
+
+  <meta property="og:site_name" content="_kawaiiQ&#39;s blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="_kawaiiQ&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-logo">
+      <div>
+        <a href="/"><img src="/images/logo.png" /></a>
+        
+          <a href="/"><img id="logo-widget" src="/images/widget.png" /></a>
+        
+      </div>
+    </h1>
+    <p class="site-description">Blind Busy All Day</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/archives">所有文章</a></li>
+      
+        <li><a href="/about">关于我</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Coursera《机器学习》学习笔记（二）：神经网络篇</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/articles/2/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-11-06T16:24:19.000Z">
+          2017-11-07
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>&#x8FD9;&#x4E00;&#x7BC7;&#x662F;<a href="https://www.coursera.org/learn/machine-learning" target="_blank" rel="external">&#x300A;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x300B;</a>&#x7B2C;&#x56DB;&#x5468;&#x5230;&#x7B2C;&#x4E94;&#x5468;&#x77E5;&#x8BC6;&#x70B9;&#x7684;&#x603B;&#x7ED3;&#xFF0C;&#x4E3B;&#x8981;&#x56F4;&#x7ED5;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x5C55;&#x5F00;&#x3002;</p>
+<p>&#x524D;&#x9762;&#x8BF4;&#x5230;&#xFF0C;&#x5728;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x4E0E;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x4E2D;&#xFF0C;&#x60F3;&#x8981;&#x83B7;&#x5F97;&#x826F;&#x597D;&#x7684;&#x9884;&#x6D4B;&#x6548;&#x679C;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x597D;&#x7684;&#x5047;&#x8BBE;&#x51FD;&#x6570;&#x7684;&#x5F62;&#x5F0F;&#x3002;&#x800C;&#x4E3A;&#x4E86;&#x6709;&#x4E00;&#x4E2A;&#x597D;&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x9700;&#x8981;&#x5148;&#x5BF9;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#x7684;&#x6A21;&#x578B;&#x6709;&#x4E00;&#x4E2A;&#x521D;&#x6B65;&#x7684;&#x4F30;&#x8BA1;&#x3002;&#x90A3;&#x8FD9;&#x5C31;&#x6709;&#x4E00;&#x4E2A;&#x6BD4;&#x8F83;&#x5C34;&#x5C2C;&#x7684;&#x60C5;&#x51B5;&#xFF1A;&#x6211;&#x4EEC;&#x7528;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x662F;&#x4E3A;&#x4E86;&#x83B7;&#x5F97;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#x7684;&#x6A21;&#x578B;&#xFF0C;&#x800C;&#x4E3A;&#x4E86;&#x8BA9;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x6709;&#x597D;&#x7684;&#x6548;&#x679C;&#xFF0C;&#x6211;&#x4EEC;&#x53C8;&#x9700;&#x8981;&#x5148;&#x77E5;&#x9053;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#x7684;&#x6A21;&#x578B;&#x2026;&#x2026;</p>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x968F;&#x7740;&#x7279;&#x5F81;&#x7684;&#x589E;&#x52A0;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x91C7;&#x7528;&#x591A;&#x6B21;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x591A;&#x6B21;&#x9879;&#x7684;&#x6570;&#x91CF;&#x4E5F;&#x662F;&#x4F1A;&#x6307;&#x6570;&#x7EA7;&#x7684;&#x589E;&#x52A0;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5047;&#x8BBE;&#x67D0;&#x4E2A;&#x95EE;&#x9898;&#x6709;100&#x4E2A;&#x7279;&#x5F81;&#xFF0C;&#x5982;&#x679C;&#x51FD;&#x6570;&#x5305;&#x542B;&#x6240;&#x6709;&#x7684;&#x4E8C;&#x6B21;&#x9879;&#xFF0C;&#x90A3;&#x5C06;&#x4F1A;&#x6709;&#x591A;&#x8FBE;5000&#x4E2A;&#x4E8C;&#x6B21;&#x9879;&#xFF1B;&#x800C;&#x5982;&#x679C;&#x518D;&#x5305;&#x542B;&#x4E09;&#x6B21;&#x9879;&#xFF0C;&#x5219;&#x5C06;&#x4F1A;&#x6709;&#x591A;&#x8FBE;17000&#x4E2A;&#x4E09;&#x6B21;&#x9879;&#x3002;&#x5728;&#x56FE;&#x50CF;&#x8BC6;&#x522B;&#x4E2D;&#xFF0C;&#x4E00;&#x4E2A;$50 \times 50$&#x50CF;&#x7D20;&#x7684;&#x56FE;&#x7247;&#xFF0C;&#x5982;&#x679C;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x662F;&#x4E00;&#x4E2A;&#x7279;&#x5F81;&#x7684;&#x8BDD;&#xFF0C;&#x90FD;&#x5C06;&#x5305;&#x542B;&#x591A;&#x8FBE;$50 \times 50 = 2500$&#x4E2A;&#x7279;&#x5F81;&#xFF0C;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x5EFA;&#x7ACB;&#x591A;&#x9879;&#x5F0F;&#x7684;&#x5047;&#x8BBE;&#x51FD;&#x6570;&#xFF0C;&#x8BA1;&#x7B97;&#x91CF;&#x662F;&#x96BE;&#x4EE5;&#x60F3;&#x8C61;&#x7684;&#x3002;</p>
+<p>&#x800C;&#x4F7F;&#x7528;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x5219;&#x53EF;&#x4EE5;&#x5F88;&#x597D;&#x5730;&#x89E3;&#x51B3;&#x8FD9;&#x4E9B;&#x590D;&#x6742;&#x7684;&#x975E;&#x7EBF;&#x6027;&#x5206;&#x7C7B;&#x95EE;&#x9898;&#xFF0C;&#x800C;&#x4E14;&#x66F4;&#x597D;&#x7684;&#x4E00;&#x70B9;&#x662F;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x518D;&#x9700;&#x8981;&#x50CF;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x4E0E;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x4E00;&#x6837;&#x9700;&#x8981;&#x5148;&#x6784;&#x9020;&#x5047;&#x8BBE;&#x51FD;&#x6570;&#x4E86;&#x3002;</p>
+<a id="more"></a>
+<h2 id="&#x4E3B;&#x8981;&#x5185;&#x5BB9;"><a href="#&#x4E3B;&#x8981;&#x5185;&#x5BB9;" class="headerlink" title="&#x4E3B;&#x8981;&#x5185;&#x5BB9;"></a>&#x4E3B;&#x8981;&#x5185;&#x5BB9;</h2><ul>
+<li>&#x4EC0;&#x4E48;&#x662F;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;</li>
+<li>&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x6A21;&#x578B;</li>
+<li>&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;</li>
+<li>&#x6700;&#x4F18;&#x5316;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;</li>
+</ul>
+<p><br></p>
+<h2 id="&#x4EC0;&#x4E48;&#x662F;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;"><a href="#&#x4EC0;&#x4E48;&#x662F;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;"></a>&#x4EC0;&#x4E48;&#x662F;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;</h2><p>&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x662F;&#x4ECE;&#x751F;&#x7269;&#x5B66;&#x4E2D;&#x83B7;&#x5F97;&#x7684;&#x7075;&#x611F;&#x3002;&#x4ECE;&#x751F;&#x7269;&#x5B66;&#x7684;&#x89D2;&#x5EA6;&#x6765;&#x8BB2;&#xFF0C;&#x4EBA;&#x7C7B;&#x5927;&#x8111;&#x5BF9;&#x5916;&#x754C;&#x4E8B;&#x7269;&#x7684;&#x611F;&#x77E5;&#xFF0C;&#x662F;&#x5927;&#x8111;&#x7684;&#x795E;&#x7ECF;&#x5143;&#x4E4B;&#x95F4;&#x4EA4;&#x4E92;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x800C;&#x5927;&#x8111;&#x5BF9;&#x4E8E;&#x5916;&#x754C;&#x4E8B;&#x7269;&#x7684;&#x611F;&#x77E5;&#xFF0C;&#x5219;&#x662F;&#x901A;&#x8FC7;&#x4E0D;&#x540C;&#x65B9;&#x9762;&#x9010;&#x7EA7;&#x5904;&#x7406;&#x5F97;&#x5230;&#x7684;&#x3002;</p>
+<p>&#x4E3E;&#x4E2A;&#x6817;&#x5B50;&#xFF1A;</p>
+<img src="/articles/2/pic1.png" alt="&#x55B5;&#x5E15;&#x65AF;" title="&#x55B5;&#x5E15;&#x65AF;">
+<p>&#x8FD9;&#x5E45;&#x56FE;&#x7247;&#x88AB;&#x4F60;&#x7684;&#x773C;&#x775B;&#x770B;&#x5230;&#x540E;&#x5E76;&#x5C06;&#x4FE1;&#x53F7;&#x4F20;&#x5165;&#x5927;&#x8111;&#x540E;&#xFF0C;&#x4F60;&#x7684;&#x773C;&#x775B;&#x76F4;&#x63A5;&#x611F;&#x53D7;&#x5230;&#x7684;&#x662F;&#x989C;&#x8272;&#xFF0C;&#x7136;&#x540E;&#x5927;&#x8111;&#x6839;&#x636E;&#x989C;&#x8272;&#x5206;&#x8FA8;&#x5F62;&#x72B6;&#x8F6E;&#x5ED3;&#xFF0C;&#x6839;&#x636E;&#x5F62;&#x72B6;&#x8F6E;&#x5ED3;&#x548C;&#x989C;&#x8272;&#x8FA9;&#x8BA4;&#x51FA;&#x5404;&#x79CD;&#x7269;&#x4F53;&#xFF0C;&#x8FD9;&#x4E9B;&#x7269;&#x4F53;&#x6240;&#x6784;&#x6210;&#x7684;&#x7279;&#x5F81;&#x8BA4;&#x51FA;&#x8FD9;&#x662F;&#x4E2A;&#x4E8C;&#x6B21;&#x5143;&#x7684;&#x59B9;&#x5B50;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x4F60;&#x770B;&#x8FC7;&#x7684;&#x756A;&#x91CC;&#x5BFB;&#x627E;&#x8FD9;&#x4E2A;&#x59B9;&#x5B50;&#x662F;&#x8C01;&#x2026;&#x2026;&#x6700;&#x540E;&#xFF0C;&#x8FD9;&#x5E45;&#x56FE;&#x50CF;&#x5728;&#x4F60;&#x8111;&#x4E2D;&#x7ECF;&#x8FC7;&#x5C42;&#x5C42;&#x5904;&#x7406;&#xFF0C;&#x7EC8;&#x4E8E;&#x62BD;&#x8C61;&#x51FA;&#x4E00;&#x53E5;&#x8BDD;&#xFF1A;&#x201C;&#x55B5;&#x5E15;&#x65AF;&#xFF01;&#x201D;</p>
+<p>&#x800C;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7B97;&#x6CD5;&#x6240;&#x6A21;&#x62DF;&#x7684;&#x4E5F;&#x6B63;&#x662F;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#xFF0C;&#x901A;&#x8FC7;&#x5404;&#x7EA7;&#x795E;&#x7ECF;&#x5143;&#x5BF9;&#x5927;&#x91CF;&#x7279;&#x5F81;&#x7684;&#x5C42;&#x5C42;&#x5904;&#x7406;&#xFF0C;&#x6BCF;&#x4E00;&#x5C42;&#x6BCF;&#x4E2A;&#x795E;&#x7ECF;&#x5143;&#x90FD;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x4E00;&#x70B9;&#x5904;&#x7406;&#xFF0C;&#x7136;&#x540E;&#x4F20;&#x5230;&#x4E0B;&#x4E00;&#x7EA7;&#x7EE7;&#x7EED;&#x5904;&#x7406;&#xFF0C;&#x76F4;&#x5230;&#x6700;&#x540E;&#x5F97;&#x5230;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;&#x3002;</p>
+<p><br></p>
+<h2 id="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x6A21;&#x578B;"><a href="#&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x6A21;&#x578B;" class="headerlink" title="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x6A21;&#x578B;"></a>&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x6A21;&#x578B;</h2><p>&#x7B80;&#x5355;&#x7684;&#x8BB2;&#xFF0C;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x5C31;&#x662F;&#x7531;&#x795E;&#x7ECF;&#x5143;&#x5C42;&#x5C42;&#x8FDE;&#x63A5;&#x6784;&#x6210;&#x7684;&#x7F51;&#x7EDC;&#x3002;</p>
+<h3 id="&#x795E;&#x7ECF;&#x5143;&#x7684;&#x7ED3;&#x6784;"><a href="#&#x795E;&#x7ECF;&#x5143;&#x7684;&#x7ED3;&#x6784;" class="headerlink" title="&#x795E;&#x7ECF;&#x5143;&#x7684;&#x7ED3;&#x6784;"></a>&#x795E;&#x7ECF;&#x5143;&#x7684;&#x7ED3;&#x6784;</h3><p>&#x5728;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4E2D;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x795E;&#x7ECF;&#x5143;&#x90FD;&#x7528;&#x4E00;&#x4E2A;&#x903B;&#x8F91;&#x5355;&#x5143;&#x6765;&#x6A21;&#x62DF;&#xFF0C;&#x5B83;&#x7684;&#x4EFB;&#x52A1;&#x5F88;&#x7B80;&#x5355;&#xFF1A;&#x63A5;&#x53D7;&#x8F93;&#x5165;&#xFF0C;&#x8BA1;&#x7B97;&#x4E00;&#x4E0B;&#xFF0C;&#x5411;&#x4E0B;&#x4E00;&#x7EA7;&#x4F20;&#x9012;&#x7ED3;&#x679C;&#x3002;&#x5176;&#x8F93;&#x5165;&#x6765;&#x81EA;&#x4E8E;&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#x6216;&#x524D;&#x4E00;&#x7EA7;&#x795E;&#x7ECF;&#x5143;&#x7684;&#x8F93;&#x51FA;&#xFF0C;&#x5176;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;&#x4E0E;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x7C7B;&#x4F3C;&#xFF0C;&#x4E5F;&#x662F;&#x5F97;&#x5230;&#x5047;&#x8BBE;&#x51FD;&#x6570;$h_\theta (x) = \dfrac{1}{1 + e^{\theta^Tx}}$&#x4E2D;&#x7684;&#x7ED3;&#x679C;&#x3002;&#x5728;&#x5F88;&#x591A;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x6587;&#x732E;&#x4E2D;&#xFF0C;$\theta$&#x4E5F;&#x88AB;&#x79F0;&#x4F5C;<strong>&#x6743;&#x91CD;</strong>&#xFF0C;&#x5176;&#x63A7;&#x5236;&#x4E86;&#x524D;&#x4E00;&#x7EA7;&#x903B;&#x8F91;&#x5355;&#x5143;&#x7684;&#x8F93;&#x51FA;&#x4EE5;&#x600E;&#x6837;&#x7684;&#x6743;&#x91CD;&#x8F93;&#x5165;&#x5230;&#x8BE5;&#x903B;&#x8F91;&#x5355;&#x5143;&#x4E2D;&#x3002;S&#x5F62;&#x51FD;&#x6570;&#x8FD9;&#x6837;&#x7684;&#x975E;&#x7EBF;&#x6027;&#x51FD;&#x6570;&#x4E5F;&#x88AB;&#x79F0;&#x4F5C;<strong>&#x6FC0;&#x52B1;&#x51FD;&#x6570;</strong>&#xFF0C;&#x903B;&#x8F91;&#x5355;&#x5143;&#x6240;&#x63A5;&#x53D7;&#x5230;&#x7684;&#x8F93;&#x5165;&#xFF0C;&#x5373;$\theta x$&#x88AB;&#x79F0;&#x4E3A;<strong>&#x6FC0;&#x52B1;</strong>&#x3002;</p>
+<img src="/articles/2/pic2.png" alt="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;" title="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;">
+<p>&#x5BF9;&#x4E8E;&#x7279;&#x5F81;&#x548C;&#x53C2;&#x6570;$\theta$&#xFF0C;&#x53EF;&#x4EE5;&#x5411;&#x91CF;&#x5316;&#x4E3A;</p>
+<script type="math/tex; mode=display">x = \begin{bmatrix}x_0 \newline x_1 \newline x_2 \newline x_3 \newline\end{bmatrix}, \theta = \begin{bmatrix}\theta_0 \newline \theta_1 \newline \theta_2 \newline \theta_3 \newline\end{bmatrix},</script><p>&#x901A;&#x5E38;&#xFF0C;$x_0$&#x4E5F;&#x4F5C;&#x4E3A;&#x795E;&#x7ECF;&#x5143;&#x7684;&#x8F93;&#x5165;&#xFF0C;&#x5B83;&#x88AB;&#x79F0;&#x4F5C;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x6216;&#x504F;&#x7F6E;&#x795E;&#x7ECF;&#x5143;&#x3002;</p>
+<img src="/articles/2/pic3.png" alt="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;" title="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;">
+<h3 id="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x7ED3;&#x6784;"><a href="#&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x7ED3;&#x6784;" class="headerlink" title="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x7ED3;&#x6784;"></a>&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x7ED3;&#x6784;</h3><p>&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x7ED3;&#x6784;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF0C;&#x5176;&#x4E2D;&#xFF0C;$x_0$&#xFF0C;$a_1^{(2)}$&#x4E3A;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x3002;&#x6574;&#x4E2A;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4ECE;&#x6700;&#x5DE6;&#x8FB9;&#x5F00;&#x59CB;&#x5411;&#x53F3;&#x9010;&#x7EA7;&#x8BA1;&#x7B97;&#xFF0C;&#x7531;&#x6700;&#x540E;&#x4E00;&#x5C42;&#x7684;&#x7ED3;&#x70B9;&#x8F93;&#x51FA;&#x4E86;&#x53C2;&#x6570;$\theta$&#x3002;</p>
+<img src="/articles/2/pic4.png" alt="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x4F8B;&#x5B50;" title="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x4F8B;&#x5B50;">
+<p>&#x7701;&#x7565;&#x6389;&#x504F;&#x6267;&#x5355;&#x5143;&#x540E;&#x4EE5;&#x53CA;&#x7B26;&#x53F7;&#x540E;&#x7ED3;&#x6784;&#x66F4;&#x52A0;&#x76F4;&#x89C2;&#x4E00;&#x4E9B;&#xFF1A;</p>
+<img src="/articles/2/pic5.png" alt="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x4F8B;&#x5B50;" title="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x4F8B;&#x5B50;">
+<p>&#x5728;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4E2D;&#xFF0C;&#x7B2C;&#x4E00;&#x5C42;&#x662F;&#x8F93;&#x5165;&#x7684;&#x7279;&#x5F81;&#x9879;&#xFF0C;&#x56E0;&#x6B64;&#x4E5F;&#x88AB;&#x79F0;&#x4E3A;<strong>&#x8F93;&#x5165;&#x5C42;</strong>&#xFF1B;&#x6700;&#x540E;&#x4E00;&#x5C42;&#x7528;&#x4E8E;&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#xFF0C;&#x56E0;&#x6B64;&#x4E5F;&#x88AB;&#x6210;&#x4E3A;<strong>&#x8F93;&#x51FA;&#x5C42;</strong>&#xFF0C;&#x8F93;&#x51FA;&#x5C42;&#x4E2D;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;&#x4E5F;&#x79F0;&#x4E3A;<strong>&#x8F93;&#x51FA;&#x5355;&#x5143;</strong>&#xFF1B;&#x800C;&#x5728;&#x8F93;&#x5165;&#x5C42;&#x548C;&#x8F93;&#x51FA;&#x5C42;&#x4E4B;&#x95F4;&#x7684;&#x82E5;&#x5E72;&#x5C42;&#x5219;&#x88AB;&#x79F0;&#x4E3A;<strong>&#x9690;&#x85CF;&#x5C42;</strong>&#xFF08;&#x5728;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x9690;&#x85CF;&#x5C42;&#x53EA;&#x6709;&#x4E2D;&#x95F4;&#x7684;&#x4E00;&#x5C42;&#xFF0C;&#x800C;&#x5B9E;&#x9645;&#x4E0A;&#x9690;&#x85CF;&#x5C42;&#x53EF;&#x4EE5;&#x6709;&#x591A;&#x5C42;&#xFF09;&#x3002;&#x4E3A;&#x5565;&#x53EB;&#x9690;&#x85CF;&#x5C42;&#x5462;&#xFF0C;&#x56E0;&#x4E3A;&#x4ECE;&#x4F7F;&#x7528;&#x8005;&#x7684;&#x89D2;&#x5EA6;&#x770B;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x662F;&#x628A;&#x7279;&#x5F81;&#x653E;&#x5230;&#x4E86;&#x8F93;&#x5165;&#x5C42;&#xFF0C;&#x7136;&#x540E;&#x4ECE;&#x8F93;&#x51FA;&#x5C42;&#x5F97;&#x5230;&#x4E86;&#x7ED3;&#x679C;&#xFF0C;&#x81F3;&#x4E8E;&#x4E2D;&#x95F4;&#x8FD9;&#x4E9B;&#x5C42;&#xFF0C;&#x4ECE;&#x529F;&#x80FD;&#x4E0A;&#x770B;&#x4F3C;&#x4E4E;&#x662F;&#x201C;&#x9690;&#x85CF;&#x201D;&#x4E86;&#x8D77;&#x6765;&#xFF0C;&#x800C;&#x4E14;&#x6211;&#x4EEC;&#x4E5F;&#x4E0D;&#x5173;&#x5FC3;&#x4E2D;&#x95F4;&#x7684;&#x503C;&#x662F;&#x5565;&#x3002;</p>
+<p>&#x7B80;&#x5355;&#x6765;&#x8BB2;&#xFF0C;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x8BA1;&#x7B97;&#x8FC7;&#x7A0B;&#x4E3A;</p>
+<script type="math/tex; mode=display">\begin{bmatrix}x_0 \newline x_1 \newline x_2 \newline \end{bmatrix}\rightarrow\begin{bmatrix}\ \ \ \newline \end{bmatrix}\rightarrow h_\theta(x)</script><p>&#x4E2D;&#x95F4;&#x88AB;&#x7701;&#x7565;&#x7684;&#x5C31;&#x662F;&#x9690;&#x85CF;&#x5C42;&#x3002;</p>
+<p>&#x4E3A;&#x4E86;&#x8868;&#x793A;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x6A21;&#x578B;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x5B9A;&#x4E49;&#x4E00;&#x4E9B;&#x7B26;&#x53F7;&#x3002;</p>
+<ul>
+<li>$a_i^{(j)}$&#x8868;&#x793A;&#x7B2C;j&#x5C42;&#x7684;&#x7B2C;i&#x4E2A;&#x903B;&#x8F91;&#x5355;&#x5143;&#x8BFB;&#x5165;&#x8F93;&#x5165;&#x5E76;&#x8BA1;&#x7B97;&#x8F93;&#x51FA;&#x7684;&#x503C;&#xFF0C;&#x4E5F;&#x79F0;&#x4F5C;<strong>&#x6FC0;&#x52B1;&#x503C;</strong>&#x3002;</li>
+<li>$\Theta^{(j)}$&#x662F;&#x4E00;&#x4E2A;&#x7531;&#x6743;&#x503C;&#xFF0C;&#x6216;&#x8005;&#x8BF4;&#x53C2;&#x6570;$\theta$&#x7EC4;&#x6210;&#x7684;&#x77E9;&#x9635;&#x3002;</li>
+</ul>
+<p>&#x4F8B;&#x5982;&#xFF0C;&#x4E0A;&#x56FE;&#x7684;&#x6A21;&#x578B;&#x8BA1;&#x7B97;&#x8FC7;&#x7A0B;&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x4E3A;</p>
+<script type="math/tex; mode=display">\begin{align*} a_1^{(2)} = g(\Theta_{10}^{(1)}x_0 + \Theta_{11}^{(1)}x_1 + \Theta_{12}^{(1)}x_2 + \Theta_{13}^{(1)}x_3) \newline a_2^{(2)} = g(\Theta_{20}^{(1)}x_0 + \Theta_{21}^{(1)}x_1 + \Theta_{22}^{(1)}x_2 + \Theta_{23}^{(1)}x_3) \newline a_3^{(2)} = g(\Theta_{30}^{(1)}x_0 + \Theta_{31}^{(1)}x_1 + \Theta_{32}^{(1)}x_2 + \Theta_{33}^{(1)}x_3) \newline h_\Theta(x) = a_1^{(3)} = g(\Theta_{10}^{(2)}a_0^{(2)} + \Theta_{11}^{(2)}a_1^{(2)} + \Theta_{12}^{(2)}a_2^{(2)} + \Theta_{13}^{(2)}a_3^{(2)}) \newline \end{align*}</script><p>&#x5BF9;&#x4E8E;&#x77E9;&#x9635;$\Theta^{(j)}$&#xFF0C;&#x5982;&#x679C;&#x7B2C;<script type="math/tex">j</script>&#x5C42;&#x6709;<script type="math/tex">s_j</script>&#x4E2A;&#x5355;&#x5143;&#xFF0C;&#x800C;&#x7B2C;<script type="math/tex">j+1</script>&#x5C42;&#x6709;<script type="math/tex">s_{j+1}</script>&#x4E2A;&#x5355;&#x5143;&#xFF0C;&#x90A3;&#x4E48;<script type="math/tex">\Theta^{(j)}</script>&#x662F;&#x4E00;&#x4E2A;<script type="math/tex">s_{j+1} \times (s_j + 1)</script>&#x7684;&#x77E9;&#x9635;&#xFF08;&#x52A0;$1$&#x662F;&#x56E0;&#x4E3A;&#x6709;&#x504F;&#x7F6E;&#x5355;&#x5143;&#xFF09;&#x3002;&#x4ED4;&#x7EC6;&#x89C2;&#x5BDF;&#x4E0A;&#x9762;&#x7684;&#x5F0F;&#x5B50;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#xFF0C;&#x5BF9;&#x4E8E;&#x7B2C;$j$&#x5C42;&#x7684;&#x77E9;&#x9635;<script type="math/tex">\Theta^{(j)}</script>&#xFF0C;&#x7B2C;$i$&#x884C;&#x662F;&#x7B2C;$j+1$&#x5C42;&#x4E2D;&#x7B2C;$i$&#x4E2A;&#x903B;&#x8F91;&#x5355;&#x5143;&#x7684;&#x53C2;&#x6570;$\theta$&#xFF0C;&#x5982;&#x679C;&#x6309;&#x6743;&#x91CD;&#x7684;&#x89D2;&#x5EA6;&#x8BB2;&#xFF0C;<script type="math/tex">\Theta_{i,k}^{(j)}</script>&#x8868;&#x793A;&#x7684;&#x662F;&#x7B2C;$j$&#x5C42;&#x7B2C;$k$&#x4E2A;&#x903B;&#x8F91;&#x5355;&#x5143;&#x7684;&#x8F93;&#x51FA;&#x4EE5;&#x591A;&#x5927;&#x7684;&#x6743;&#x91CD;&#x8F93;&#x5165;&#x5230;&#x7B2C;$j+1$&#x5C42;&#x4E2D;&#x7B2C;$i$&#x4E2A;&#x903B;&#x8F91;&#x5355;&#x5143;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x6574;&#x4E2A;&#x8BA1;&#x7B97;&#x7684;&#x8FC7;&#x7A0B;&#x5C31;&#x662F;&#xFF0C;&#x4E0A;&#x4E00;&#x5C42;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;&#x7684;&#x8F93;&#x51FA;&#x503C;&#xFF0C;&#x5373;&#x6FC0;&#x52B1;&#x503C;&#xFF0C;&#x6309;&#x7167;&#x4E0D;&#x540C;&#x7684;&#x6743;&#x91CD;&#x4F20;&#x9012;&#x5230;&#x4E0B;&#x4E00;&#x5C42;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x903B;&#x8F91;&#x5355;&#x5143;&#x4E2D;&#x3002;&#x4E0B;&#x4E00;&#x5C42;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x903B;&#x8F91;&#x5355;&#x5143;&#x6839;&#x636E;&#x4F20;&#x9012;&#x5230;&#x8BE5;&#x5355;&#x5143;&#x4E0A;&#x7684;&#x6FC0;&#x52B1;&#x503C;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#xFF0C;&#x5F97;&#x5230;&#x8BE5;&#x903B;&#x8F91;&#x5355;&#x5143;&#x9700;&#x8981;&#x4F20;&#x9012;&#x5230;&#x518D;&#x4E0B;&#x4E00;&#x5C42;&#x7684;&#x6FC0;&#x52B1;&#x503C;&#x3002;&#x6700;&#x540E;&#xFF0C;&#x8BE5;&#x5C42;&#x7684;&#x6240;&#x6709;&#x903B;&#x8F91;&#x5355;&#x5143;&#x91CD;&#x590D;&#x4E0A;&#x8FF0;&#x6B65;&#x9AA4;&#xFF0C;&#x5C06;&#x6FC0;&#x52B1;&#x503C;&#x7EE7;&#x7EED;&#x4F20;&#x9012;&#x5230;&#x4E0B;&#x4E00;&#x5C42;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;&#x4E2D;&#x3002;&#x8FD9;&#x6837;&#xFF0C;&#x7ECF;&#x8FC7;&#x5C42;&#x5C42;&#x903B;&#x8F91;&#x5355;&#x5143;&#x7684;&#x8BA1;&#x7B97;&#x548C;&#x5C42;&#x5C42;&#x77E9;&#x9635;&#x4F20;&#x9012;&#xFF0C;&#x6700;&#x7EC8;&#x5F97;&#x5230;&#x7ED3;&#x679C;$\theta$&#xFF0C;&#x8FD9;&#x4E00;&#x8FC7;&#x7A0B;&#x4E5F;&#x88AB;&#x79F0;&#x4F5C;<strong>&#x524D;&#x5411;&#x4F20;&#x9012;&#xFF08;forward propagation&#xFF09;</strong>&#x3002;</p>
+<p>&#x5728;<a href="https://www.coursera.org/learn/machine-learning" target="_blank" rel="external">&#x8FD9;&#x95E8;&#x8BFE;</a>&#x7B2C;&#x56DB;&#x5468;&#x91CC;&#x9762;&#x63D0;&#x4F9B;&#x4E86;&#x5F88;&#x591A;&#x751F;&#x52A8;&#x5F62;&#x8C61;&#x7684;&#x4F8B;&#x5B50;&#x6765;&#x8FDB;&#x4E00;&#x6B65;&#x76F4;&#x89C2;&#x5730;&#x5C55;&#x793A;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7B97;&#x6CD5;&#xFF0C;&#x5982;&#x679C;&#x5BF9;&#x4E8E;&#x4E0A;&#x9762;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x6A21;&#x578B;&#x4ECD;&#x65E7;&#x611F;&#x89C9;&#x628A;&#x63E1;&#x5F97;&#x6BD4;&#x8F83;&#x6A21;&#x7CCA;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x4E00;&#x4E0B;&#x91CC;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x3002;&#x672C;&#x7BC7;&#x4EC5;&#x4EC5;&#x662F;&#x5BF9;&#x77E5;&#x8BC6;&#x70B9;&#x7684;&#x603B;&#x7ED3;&#xFF0C;&#x6240;&#x4EE5;&#x5C31;&#x4E0D;&#x4E00;&#x4E00;&#x5217;&#x4E3E;&#x4E86;&#x3002;</p>
+<h3 id="&#x591A;&#x7C7B;&#x522B;&#x7684;&#x5206;&#x7C7B;&#x65B9;&#x6CD5;"><a href="#&#x591A;&#x7C7B;&#x522B;&#x7684;&#x5206;&#x7C7B;&#x65B9;&#x6CD5;" class="headerlink" title="&#x591A;&#x7C7B;&#x522B;&#x7684;&#x5206;&#x7C7B;&#x65B9;&#x6CD5;"></a>&#x591A;&#x7C7B;&#x522B;&#x7684;&#x5206;&#x7C7B;&#x65B9;&#x6CD5;</h3><p>&#x4E0A;&#x9762;&#x7684;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x6A21;&#x578B;&#x4EC5;&#x4EC5;&#x662F;&#x7528;&#x4E8E;&#x4E24;&#x7C7B;&#x7684;&#x5206;&#x7C7B;&#x95EE;&#x9898;&#xFF0C;&#x6309;&#x7167;&#x4E4B;&#x524D;&#x7684;&#x5957;&#x8DEF;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x5C06;&#x5176;&#x63A8;&#x5E7F;&#x5230;&#x591A;&#x7C7B;&#x522B;&#x7684;&#x5206;&#x7C7B;&#x4E2D;&#x3002;</p>
+<p>&#x8981;&#x5C06;&#x4E0A;&#x9762;&#x7684;&#x6A21;&#x578B;&#x63A8;&#x5E7F;&#x5230;&#x591A;&#x7C7B;&#x522B;&#x7684;&#x5206;&#x7C7B;&#x4E2D;&#xFF0C;&#x65B9;&#x6CD5;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x5728;&#x8F93;&#x51FA;&#x5C42;&#x4F7F;&#x7528;&#x591A;&#x4E2A;&#x8F93;&#x51FA;&#x5355;&#x5143;&#x5373;&#x53EF;&#x3002;&#x5176;&#x4E2D;&#xFF0C;&#x6BCF;&#x4E2A;&#x8F93;&#x51FA;&#x5355;&#x5143;&#x7528;&#x4E8E;&#x5224;&#x65AD;&#x662F;&#x5426;&#x5C5E;&#x4E8E;&#x67D0;&#x4E00;&#x4E2A;&#x7C7B;&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#xFF0C;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#x7684;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x6A21;&#x578B;&#x5C31;&#x5B9E;&#x73B0;&#x4E86;&#x4E09;&#x4E2A;&#x7C7B;&#x522B;&#x7684;&#x5206;&#x7C7B;&#x3002;</p>
+<img src="/articles/2/pic6.png" alt="&#x591A;&#x7C7B;&#x522B;&#x5206;&#x7C7B;&#x7684;&#x4F8B;&#x5B50;" title="&#x591A;&#x7C7B;&#x522B;&#x5206;&#x7C7B;&#x7684;&#x4F8B;&#x5B50;">
+<p>&#x800C;&#x5176;&#x6700;&#x7EC8;&#x7684;&#x8F93;&#x51FA;&#x5E94;&#x4E3A;&#x4E00;&#x4E2A;&#x5411;&#x91CF;&#xFF0C;&#x5176;&#x4E2D;&#x5BF9;&#x5E94;&#x5224;&#x522B;&#x7ED3;&#x679C;&#x7684;&#x4F4D;&#x7F6E;&#x4E3A;1&#xFF0C;&#x5176;&#x4ED6;&#x4F4D;&#x7F6E;&#x4E3A;0&#x3002;&#x5BF9;&#x4E8E;&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x5176;&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#x5E94;&#x4E3A;&#x4E0B;&#x9762;&#x4E09;&#x4E2A;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#xFF1A;</p>
+<script type="math/tex; mode=display">\begin{bmatrix}1 \newline 0 \newline 0 \newline\end{bmatrix},\begin{bmatrix}0 \newline 1 \newline 0 \newline\end{bmatrix},\begin{bmatrix}0 \newline 0 \newline 1 \newline\end{bmatrix}</script><p>&#x800C;&#x4E3A;&#x4E86;&#x627E;&#x51FA;&#x54EA;&#x4E00;&#x4E2A;&#x662F;1&#xFF0C;&#x54EA;&#x4E9B;&#x662F;0&#xFF0C;&#x5176;&#x65B9;&#x6CD5;&#x4E0E;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x7684;&#x591A;&#x7C7B;&#x522B;&#x5206;&#x7C7B;&#x65B9;&#x6CD5;&#x4E00;&#x6837;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x4F9D;&#x6B21;&#x68C0;&#x6D4B;&#x6BCF;&#x4E2A;&#x8F93;&#x51FA;&#x5355;&#x5143;&#x6240;&#x7B97;&#x5F97;&#x7684;&#x6982;&#x7387;&#xFF0C;&#x7136;&#x540E;&#x5BFB;&#x627E;&#x6700;&#x5927;&#x503C;&#x5373;&#x53EF;&#x3002;</p>
+<h3 id="&#x524D;&#x5411;&#x4F20;&#x9012;&#x7684;&#x5411;&#x91CF;&#x5316;"><a href="#&#x524D;&#x5411;&#x4F20;&#x9012;&#x7684;&#x5411;&#x91CF;&#x5316;" class="headerlink" title="&#x524D;&#x5411;&#x4F20;&#x9012;&#x7684;&#x5411;&#x91CF;&#x5316;"></a>&#x524D;&#x5411;&#x4F20;&#x9012;&#x7684;&#x5411;&#x91CF;&#x5316;</h3><p>&#x540C;&#x6837;&#x5730;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x524D;&#x9762;&#x63D0;&#x5230;&#x7684;&#x8BA1;&#x7B97;&#x8FC7;&#x7A0B;&#x5411;&#x91CF;&#x5316;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x524D;&#x9762;&#x6240;&#x63D0;&#x51FA;&#x7684;&#x8BA1;&#x7B97;&#x8FC7;&#x7A0B;&#xFF0C;&#x662F;&#x5BF9;&#x4E8E;&#x4E00;&#x7EC4;&#x7279;&#x5F81;&#x7684;&#x8BA1;&#x7B97;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;&#x5728;&#x8BAD;&#x7EC3;&#x8FD8;&#x662F;&#x9884;&#x6D4B;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x8BA1;&#x7B97;&#x7684;&#x90FD;&#x662F;&#x7279;&#x5F81;&#x96C6;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x6700;&#x597D;&#x80FD;&#x591F;&#x50CF;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x4E0E;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x90A3;&#x6837;&#xFF0C;&#x901A;&#x8FC7;&#x77E9;&#x9635;&#x8FD0;&#x7B97;&#x201C;&#x4E00;&#x6B65;&#x201D;&#x8BA1;&#x7B97;&#x6240;&#x6709;&#x7684;&#x7279;&#x5F81;&#x3002;</p>
+<p>&#x91C7;&#x7528;&#x5982;&#x4E0A;&#x4E00;&#x7BC7;&#x76F8;&#x540C;&#x7684;&#x65B9;&#x5F0F;&#x5411;&#x91CF;&#x5316;&#x6574;&#x4E2A;&#x7279;&#x5F81;&#x96C6;&#xFF1A;</p>
+<script type="math/tex; mode=display">X = \begin{bmatrix} (x^{(1)})^T \newline (x^{(2)})^T \newline \vdots \newline (x^{(m)})^T \newline \end{bmatrix}</script><p>&#x90A3;&#x4E48;&#xFF0C;&#x524D;&#x9762;&#x7684;&#x8BA1;&#x7B97;&#x516C;&#x5F0F;</p>
+<script type="math/tex; mode=display">\begin{align*} a_1^{(2)} = g(\Theta_{10}^{(1)}x_0 + \Theta_{11}^{(1)}x_1 + \Theta_{12}^{(1)}x_2 + \Theta_{13}^{(1)}x_3) \newline a_2^{(2)} = g(\Theta_{20}^{(1)}x_0 + \Theta_{21}^{(1)}x_1 + \Theta_{22}^{(1)}x_2 + \Theta_{23}^{(1)}x_3) \newline a_3^{(2)} = g(\Theta_{30}^{(1)}x_0 + \Theta_{31}^{(1)}x_1 + \Theta_{32}^{(1)}x_2 + \Theta_{33}^{(1)}x_3) \newline h_\Theta(x) = a_1^{(3)} = g(\Theta_{10}^{(2)}a_0^{(2)} + \Theta_{11}^{(2)}a_1^{(2)} + \Theta_{12}^{(2)}a_2^{(2)} + \Theta_{13}^{(2)}a_3^{(2)}) \newline \end{align*}</script><p>&#x5C31;&#x53EF;&#x4EE5;&#x5411;&#x91CF;&#x5316;&#x4E3A;</p>
+<script type="math/tex; mode=display">\begin{align*} & a^{(2)} = g\left(X{\left[\Theta^{(1)}\right]}^T\right) \newline & h_\Theta(X) = a^{(3)} = g\left(a^{(2)}{\left[\Theta^{(2)}\right]}^T\right) \newline \end{align*}</script><p>&#x6240;&#x4EE5;&#xFF0C;&#x5BF9;&#x4E8E;&#x9690;&#x85CF;&#x5C42;&#x548C;&#x8F93;&#x51FA;&#x5C42;&#xFF0C;&#x5047;&#x8BBE;&#x5F53;&#x524D;&#x8BA1;&#x7B97;&#x5230;&#x7B2C;$i$&#x5C42;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x5C06;$i - 1$&#x5C42;&#x7684;&#x6FC0;&#x52B1;&#x503C;&#x7EC4;&#x6210;&#x7684;&#x77E9;&#x9635;&#x53F3;&#x4E58;$\Theta^{(i-1)}$&#x7684;&#x8F6C;&#x7F6E;&#xFF0C;&#x5373;&#x53EF;&#x5F97;&#x5230;&#x8BE5;&#x5C42;&#x7684;&#x6FC0;&#x52B1;&#x7EC4;&#x6210;&#x7684;&#x77E9;&#x9635;&#xFF0C;&#x7136;&#x540E;&#x653E;&#x8FDB;&#x6FC0;&#x52B1;&#x51FD;&#x6570;&#x5373;&#x53EF;&#x5F97;&#x5230;&#x5411;&#x4E0B;&#x4E00;&#x5C42;&#x7684;&#x8F93;&#x51FA;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#x8FD9;&#x91CC;&#x7684;&#x516C;&#x5F0F;<strong>&#x6CA1;&#x6709;&#x8003;&#x8651;&#x504F;&#x7F6E;&#x5355;&#x5143;</strong>&#xFF0C;&#x8981;&#x8003;&#x8651;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x4E5F;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x5728;&#x8BA1;&#x7B97;&#x51FA;&#x6BCF;&#x5C42;&#x7684;&#x6FC0;&#x52B1;&#x503C;&#x6784;&#x6210;&#x7684;&#x77E9;&#x9635;&#x540E;&#x5728;&#x77E9;&#x9635;&#x7684;&#x6700;&#x5DE6;&#x8FB9;&#x518D;&#x6DFB;&#x52A0;&#x4E00;&#x5217;$1$&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x8F93;&#x51FA;&#x5C42;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x903B;&#x8F91;&#x5355;&#x5143;&#xFF0C;&#x90A3;&#x4E48;<script type="math/tex">h_\Theta(X)</script>&#x4E3A;&#x5217;&#x5411;&#x91CF;&#xFF0C;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x5BF9;&#x5E94;&#x76F8;&#x5E94;&#x7279;&#x5F81;&#x7684;&#x7ED3;&#x679C;&#xFF1B;&#x5982;&#x679C;&#x8F93;&#x51FA;&#x5C42;&#x6709;&#x591A;&#x4E2A;&#x903B;&#x8F91;&#x5355;&#x5143;&#xFF08;&#x591A;&#x7C7B;&#x522B;&#x5206;&#x7C7B;&#xFF09;&#xFF0C;&#x90A3;&#x4E48;<script type="math/tex">h_\Theta(X)</script>&#x4E3A;&#x77E9;&#x9635;&#xFF0C;&#x6BCF;&#x884C;&#x5BF9;&#x5E94;&#x76F8;&#x5E94;&#x4E00;&#x7EC4;&#x7279;&#x5F81;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x6BCF;&#x4E00;&#x5217;&#x4E3A;&#x5BF9;&#x5E94;&#x7684;&#x4E00;&#x4E2A;&#x7C7B;&#x7684;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;&#xFF0C;&#x751F;&#x6210;&#x6700;&#x540E;&#x7ED3;&#x679C;&#x53EA;&#x9700;&#x8981;&#x5728;&#x8FD9;&#x4E00;&#x884C;&#x91CC;&#x627E;&#x6700;&#x5927;&#x503C;&#x5373;&#x53EF;&#x3002;</p>
+<p><br></p>
+<h2 id="&#x4EE3;&#x4EF7;&#x51FD;&#x6570;"><a href="#&#x4EE3;&#x4EF7;&#x51FD;&#x6570;" class="headerlink" title="&#x4EE3;&#x4EF7;&#x51FD;&#x6570;"></a>&#x4EE3;&#x4EF7;&#x51FD;&#x6570;</h2><p>&#x5728;&#x4E86;&#x89E3;&#x4E86;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x6A21;&#x578B;&#x4E4B;&#x540E;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x662F;&#x5982;&#x4F55;&#x8FD0;&#x7528;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x6765;&#x89E3;&#x51B3;&#x5B9E;&#x9645;&#x95EE;&#x9898;&#x3002;&#x5982;&#x524D;&#x4E00;&#x7BC7;&#x6240;&#x8BF4;&#xFF0C;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7B97;&#x6CD5;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#x4E5F;&#x662F;&#x9075;&#x5FAA;&#x4E86;&#x201C;&#x627E;&#x5230;&#x89E3;&#x51B3;T&#x7684;&#x6A21;&#x578B;&#xFF0C;&#x627E;&#x5230;P&#xFF0C;&#x6700;&#x4F18;&#x5316;P&#x201D;&#x7684;&#x4E09;&#x90E8;&#x66F2;&#xFF0C;&#x800C;&#x5728;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x4E2D;&#x5C31;&#x662F;&#x6784;&#x5EFA;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#xFF0C;&#x627E;&#x5230;&#x4E00;&#x79CD;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x6700;&#x5C0F;&#x5316;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;&#x3002;</p>
+<h3 id="&#x4E00;&#x4E9B;&#x7B26;&#x53F7;&#x7EA6;&#x5B9A;"><a href="#&#x4E00;&#x4E9B;&#x7B26;&#x53F7;&#x7EA6;&#x5B9A;" class="headerlink" title="&#x4E00;&#x4E9B;&#x7B26;&#x53F7;&#x7EA6;&#x5B9A;"></a>&#x4E00;&#x4E9B;&#x7B26;&#x53F7;&#x7EA6;&#x5B9A;</h3><ul>
+<li>$\left\{ (x^{(1)} , y^{(1)}) , (x^{(2)} , y^{(2)}) , \cdots , (x^{(m)} , y^{(m)}) \right\}$&#xFF1A;&#x8BAD;&#x7EC3;&#x96C6;&#x3002;</li>
+<li>$L$&#xFF1A;&#x7F51;&#x7EDC;&#x7684;&#x603B;&#x5C42;&#x6570;&#x3002;</li>
+<li>$s_l$&#xFF1A;&#x7B2C;$l$&#x5C42;&#x903B;&#x8F91;&#x5355;&#x5143;&#x7684;&#x603B;&#x6570;&#x3002;</li>
+<li>$K$&#xFF1A;&#x8F93;&#x51FA;&#x5355;&#x5143;&#x7684;&#x4E2A;&#x6570;&#xFF0C;&#x5373;&#x8981;&#x5224;&#x522B;&#x7684;&#x7C7B;&#x7684;&#x6570;&#x91CF;&#x3002;</li>
+<li>$(h_\Theta(x^{(i)}))_k$&#xFF1A;&#x8F93;&#x51FA;&#x7684;&#x7ED3;&#x679C;&#x5411;&#x91CF;&#x7684;$i$&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x5373;&#x7B2C;$i$&#x4E2A;&#x7C7B;&#x7684;&#x5224;&#x522B;&#x7ED3;&#x679C;&#xFF0C;$y^{(i)}_k$&#x4E0E;&#x4E4B;&#x7C7B;&#x4F3C;&#x3002;</li>
+</ul>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x5BF9;&#x4E8E;&#x77E9;&#x9635;&#x4E0E;&#x5411;&#x91CF;&#x7684;&#x8FD0;&#x7B97;&#xFF0C;&#x8FD9;&#x91CC;&#x51FA;&#x73B0;&#x4E86;&#x201C;&#x5E26;&#x70B9;&#x201D;&#x7684;&#x8FD0;&#x7B97;&#x7B26;&#x53F7;&#xFF0C;&#x6765;&#x6E90;&#x4E8E;Matlab&#x4E2D;&#x7684;&#x64CD;&#x4F5C;&#xFF1A;</p>
+<ul>
+<li><script type="math/tex">\cdot\,*</script>&#xFF1A;&#x8868;&#x793A;&#x77E9;&#x9635;&#x6216;&#x5411;&#x91CF;&#x5BF9;&#x5E94;&#x5143;&#x7D20;&#x4E4B;&#x95F4;&#x76F8;&#x4E58;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x6267;&#x884C;&#x77E9;&#x9635;&#x7684;&#x4E58;&#x6CD5;&#x3002;</li>
+</ul>
+<h3 id="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;"><a href="#&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;" class="headerlink" title="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;"></a>&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;</h3><p>&#x5728;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x4E2D;&#xFF0C;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;&#xFF08;&#x542B;&#x6B63;&#x5219;&#x5316;&#x9879;&#xFF09;&#x4E3A;</p>
+<script type="math/tex; mode=display">J(\theta) = - \frac{1}{m} \sum_{i=1}^m \large[ y^{(i)}\ \log (h_\theta (x^{(i)})) + (1 - y^{(i)})\ \log (1 - h_\theta(x^{(i)}))\large] + \frac{\lambda}{2m}\sum_{j=1}^n \theta_j^2</script><p>&#x5BF9;&#x4E8E;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x6765;&#x8BF4;&#xFF0C;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;&#x662F;&#x4E0A;&#x5F0F;&#x7684;&#x4E00;&#x822C;&#x5316;&#x5F62;&#x5F0F;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x518D;&#x662F;&#x4ECE;$1$&#x5230;$m$&#x6BCF;&#x6B21;&#x52A0;&#x4E00;&#x4E2A;&#x4EE3;&#x4EF7;&#xFF0C;&#x800C;&#x662F;&#x6BCF;&#x6B21;&#x90FD;&#x52A0;$K$&#x4E2A;&#x4EE3;&#x4EF7;&#xFF0C;&#x56E0;&#x4E3A;&#x6709;K&#x4E2A;&#x8F93;&#x51FA;</p>
+<script type="math/tex; mode=display">J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \left[y^{(i)}_k \log ((h_\Theta (x^{(i)}))_k) + (1 - y^{(i)}_k)\log (1 - (h_\Theta(x^{(i)}))_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2</script><p>&#x6700;&#x540E;&#x7684;&#x6B63;&#x5219;&#x5316;&#x9879;&#x5176;&#x5B9E;&#x662F;&#x6C42;&#x6240;&#x6709;$\Theta_{j,i}^{(l)}$&#x4E2D;&#x9664;&#x4E86;&#x4E0E;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x76F8;&#x5173;&#x7684;&#x6240;&#x6709;&#x5143;&#x7D20;&#x7684;&#x5E73;&#x65B9;&#x548C;&#xFF0C;&#x51C6;&#x786E;&#x5730;&#x8BF4;&#xFF0C;&#x662F;&#x6C42;&#x8FD9;&#x4E9B;&#x77E9;&#x9635;&#x9664;&#x53BB;&#x7B2C;&#x4E00;&#x5217;&#x540E;&#x7684;&#x6240;&#x6709;&#x5143;&#x7D20;&#x7684;&#x5E73;&#x65B9;&#x548C;&#x3002;</p>
+<p>&#x5411;&#x91CF;&#x5316;&#x540E;&#x7684;&#x5F62;&#x5F0F;&#x4E3A;</p>
+<script type="math/tex; mode=display">J(\Theta) = - \frac{1}{m} \sum^m_{i=1} \sum^K_{j=1} \left[ y \cdot\!* log(h_\Theta(X)) + (1-y) \cdot\!* log(1-h_\Theta(X)) \right]_{ij} + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2</script><p>&#x8FD9;&#x91CC;&#x7684;$y$&#x4E3A;&#x76EE;&#x6807;&#x53D8;&#x91CF;&#x5F62;&#x6210;&#x7684;&#x77E9;&#x9635;&#xFF0C;&#x6BCF;&#x4E00;&#x884C;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x6837;&#x672C;&#xFF0C;&#x8BBE;&#x8BE5;&#x6837;&#x672C;&#x7684;&#x6B63;&#x786E;&#x7ED3;&#x679C;&#x4E3A;&#x7B2C;$j$&#x4E2A;&#x7C7B;&#xFF0C;&#x90A3;&#x4E48;$y$&#x77E9;&#x9635;&#x7684;&#x7B2C;$j$&#x5217;&#x5C31;&#x4E3A;$1$&#xFF0C;&#x5176;&#x4ED6;&#x4F4D;&#x7F6E;&#x4E3A;0&#x3002;</p>
+<p>&#x4ECE;&#x77E9;&#x9635;&#x8FD0;&#x7B97;&#x7684;&#x89D2;&#x5EA6;&#x770B;&#xFF0C;&#x5373;</p>
+<script type="math/tex; mode=display">\begin{align*} J(\Theta) = - \frac{1}{m} trace\left( y^Tlog(h_\Theta(X)) + (1-y)^Tlog(1-h_\Theta(X)) \right) + \newline \frac{\lambda}{2m} \sum_{l=1}^{L-1} trace\left( \left[ \left. \Theta^{(l)}_{*2} \right| \left. \Theta^{(l)}_{*3} \right| \cdots \left| \Theta^{(l)}_{*s_l} \right. \right]^T \left[ \left. \Theta^{(l)}_{*2} \right| \left. \Theta^{(l)}_{*3} \right| \cdots \left| \Theta^{(l)}_{*s_l} \right. \right]\right) \end{align*}</script><p>&#x5176;&#x4E2D;&#xFF0C;$trace$&#x8868;&#x793A;&#x77E9;&#x9635;&#x7684;&#x8FF9;&#xFF0C;&#x662F;&#x77E9;&#x9635;&#x5BF9;&#x89D2;&#x7EBF;&#x5143;&#x7D20;&#x7684;&#x548C;&#xFF0C;&#x4E0D;&#x8FC7;&#x5B9E;&#x9645;&#x8FD0;&#x7B97;&#x8FD9;&#x6837;&#x662F;&#x8981;&#x591A;&#x8BA1;&#x7B97;&#x5F88;&#x591A;&#x7528;&#x4E0D;&#x7740;&#x7684;&#x5143;&#x7D20;&#x7684;&#xFF08;&#x975E;&#x5BF9;&#x89D2;&#x7EBF;&#x5143;&#x7D20;&#xFF09;&#x3002;&#x6240;&#x4EE5;&#x5B9E;&#x9645;&#x4E0A;&#x8FD8;&#x662F;&#x7528;&#x70B9;&#x4E58;&#x7684;&#x5F62;&#x5F0F;&#x3002;&#x8FD9;&#x91CC;&#x5C31;&#x662F;&#x8BF4;&#x660E;&#x4E00;&#x4E0B;&#x70B9;&#x4E58;&#x7684;&#x6548;&#x679C;&#x7B49;&#x4E8E;&#x5565;&#xFF0C;&#x540E;&#x9762;&#x5C31;&#x4E0D;&#x518D;&#x7528;&#x77E9;&#x9635;&#x8FF9;&#x7684;&#x5F62;&#x5F0F;&#x7ED9;&#x51FA;&#x516C;&#x5F0F;&#x4E86;&#xFF0C;Latex&#x5199;&#x516C;&#x5F0F;&#x597D;&#x9EBB;&#x70E6;&#xFF08;&#x9003;</p>
+<h2 id="&#x6700;&#x4F18;&#x5316;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;"><a href="#&#x6700;&#x4F18;&#x5316;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;" class="headerlink" title="&#x6700;&#x4F18;&#x5316;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;"></a>&#x6700;&#x4F18;&#x5316;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;</h2><p>&#x540C;&#x6837;&#x5730;&#xFF0C;&#x4E3A;&#x4E86;&#x6700;&#x4F18;&#x5316;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6216;&#x8005;&#x4E4B;&#x524D;&#x63D0;&#x5230;&#x7684;&#x4E00;&#x4E9B;&#x9AD8;&#x7EA7;&#x7B97;&#x6CD5;&#x6765;&#x5B9E;&#x73B0;&#xFF0C;&#x4E3A;&#x4E86;&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x7B97;&#x6CD5;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x80FD;&#x591F;&#x8BA1;&#x7B97;&#x4E24;&#x6837;&#x4E1C;&#x897F;&#xFF1A;</p>
+<ul>
+<li>&#x4EE3;&#x4EF7;&#x51FD;&#x6570;&#xFF1A;$J(\Theta)$</li>
+<li>&#x68AF;&#x5EA6;&#xFF1A;$\dfrac{\partial}{\partial \Theta_{i,j}^{(l)}}J(\Theta)$</li>
+</ul>
+<p>&#x5176;&#x4E2D;&#xFF0C;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;$J(\Theta)$&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x5F97;&#x5230;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x63A5;&#x4E0B;&#x6765;&#x6240;&#x8981;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x5C31;&#x662F;&#x80FD;&#x591F;&#x8BA1;&#x7B97;&#x68AF;&#x5EA6;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x8FD9;&#x91CC;&#x7528;&#x5230;&#x7684;&#x662F;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#xFF0C;&#x4E4B;&#x6240;&#x4EE5;&#x53EB;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#xFF0C;&#x662F;&#x56E0;&#x4E3A;&#x8BA1;&#x7B97;&#x7684;&#x987A;&#x5E8F;&#x548C;&#x524D;&#x5411;&#x4F20;&#x64AD;&#x6B63;&#x597D;&#x76F8;&#x53CD;&#xFF0C;&#x662F;&#x4ECE;&#x8F93;&#x51FA;&#x5C42;&#x5012;&#x7740;&#x8BA1;&#x7B97;&#x56DE;&#x53BB;&#x7684;&#x3002;</p>
+<h3 id="&#x53CD;&#x5411;&#x4F20;&#x64AD;&#xFF08;Backpropagation&#xFF09;&#x7B97;&#x6CD5;"><a href="#&#x53CD;&#x5411;&#x4F20;&#x64AD;&#xFF08;Backpropagation&#xFF09;&#x7B97;&#x6CD5;" class="headerlink" title="&#x53CD;&#x5411;&#x4F20;&#x64AD;&#xFF08;Backpropagation&#xFF09;&#x7B97;&#x6CD5;"></a>&#x53CD;&#x5411;&#x4F20;&#x64AD;&#xFF08;Backpropagation&#xFF09;&#x7B97;&#x6CD5;</h3><p>&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x7684;&#x6838;&#x5FC3;&#x601D;&#x60F3;&#x662F;&#xFF0C;&#x5BF9;&#x4E8E;&#x6BCF;&#x4E2A;&#x5355;&#x5143;&#xFF0C;&#x8BA1;&#x7B97;$\delta_j^{(l)}$&#xFF0C;&#x5373;&#x7B2C;l&#x5C42;&#x7684;&#x7B2C;j&#x4E2A;&#x5355;&#x5143;&#x7684;&#x201C;&#x8BEF;&#x5DEE;&#x201D;&#x3002;</p>
+<h4 id="&#x4E0D;&#x542B;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x7684;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;"><a href="#&#x4E0D;&#x542B;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x7684;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;" class="headerlink" title="&#x4E0D;&#x542B;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x7684;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;"></a>&#x4E0D;&#x542B;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x7684;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;</h4><p>&#x4EE5;&#x4E0B;&#x9762;&#x7684;4&#x5C42;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4E3A;&#x4F8B;&#xFF1A;</p>
+<img src="/articles/2/pic7.png" alt="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x4F8B;&#x5B50;" title="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x4F8B;&#x5B50;">
+<p>&#x4E3A;&#x4E86;&#x8868;&#x793A;&#x65B9;&#x4FBF;&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x516C;&#x5F0F;&#x5747;&#x4EE5;&#x5411;&#x91CF;&#x5316;&#x7684;&#x5F62;&#x5F0F;&#x7ED9;&#x51FA;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x8F93;&#x51FA;&#x5C42;&#xFF0C;&#x6709;</p>
+<script type="math/tex; mode=display">\delta^{(4)} = a^{(4)} - y</script><p>&#x800C;&#x5BF9;&#x4E8E;&#x9690;&#x85CF;&#x5C42;&#xFF0C;&#x6709;</p>
+<script type="math/tex; mode=display">\delta^{(3)} = (\Theta^{(3)})^T\delta^{(4)} \cdot* g\prime(z^{(3)})</script><script type="math/tex; mode=display">\delta^{(2)} = (\Theta^{(2)})^T\delta^{(3)} \cdot* g\prime(z^{(2)})</script><p>&#x6CA1;&#x6709;$\delta^{(1)}$&#xFF0C;&#x56E0;&#x4E3A;&#x7B2C;&#x4E00;&#x5C42;&#x662F;&#x8F93;&#x5165;&#x5C42;&#xFF0C;&#x5BF9;&#x5E94;&#x7684;&#x662F;&#x6211;&#x4EEC;&#x5728;&#x8BAD;&#x7EC3;&#x96C6;&#x91CC;&#x89C2;&#x5BDF;&#x5230;&#x7684;&#x7279;&#x5F81;&#xFF0C;&#x4E0D;&#x5B58;&#x5728;&#x8BEF;&#x5DEE;&#x3002;</p>
+<p>&#x5176;&#x4E2D;&#xFF0C;$z^{(j)}$&#x662F;&#x7B2C;$j$&#x5C42;&#x5404;&#x5355;&#x5143;&#x63A5;&#x6536;&#x5230;&#x7684;&#x6FC0;&#x52B1;&#x503C;&#x7EC4;&#x6210;&#x7684;&#x5411;&#x91CF;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;</p>
+<script type="math/tex; mode=display">z^{(j)} = \Theta^{(j-1)}a^{(j-1)}</script><p>&#x7B97;&#x4E00;&#x4E0B;&#x4E0A;&#x8FF0;&#x516C;&#x5F0F;&#x4E2D;&#x7684;&#x5BFC;&#x6570;&#xFF0C;<script type="math/tex">g\prime(x) = g(x) \cdot\!* (1 - g(x))</script>, &#x53EF;&#x4EE5;&#x5F97;&#x5230;</p>
+<script type="math/tex; mode=display">\delta^{(3)} = (\Theta^{(3)})^T\delta^{(4)} \cdot* (a^{(3)} \cdot* (1 - a^{(3)}))</script><script type="math/tex; mode=display">\delta^{(2)} = (\Theta^{(2)})^T\delta^{(3)} \cdot* (a^{(2)} \cdot* (1 - a^{(2)}))</script><p>&#x5982;&#x679C;&#x7ED3;&#x5408;&#x56FE;&#x7247;&#x89C2;&#x5BDF;&#x516C;&#x5F0F;&#xFF0C;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#xFF0C;&#x6240;&#x8C13;$\Theta^{(j)})^T\delta^{(j+1)}$&#xFF0C;&#x5176;&#x5B9E;&#x662F;&#x6309;&#x6B63;&#x5411;&#x4F20;&#x64AD;&#x65F6;&#x4F20;&#x64AD;&#x8DEF;&#x5F84;&#x4E0A;&#x7684;&#x6743;&#x91CD;&#x5012;&#x7740;&#x4F20;&#x64AD;&#x56DE;&#x6765;&#x3002;&#x4F8B;&#x5982;&#x4E0A;&#x9762;&#x7684;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4E2D;&#x7B2C;&#x4E09;&#x5C42;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x903B;&#x8F91;&#x5355;&#x5143;&#xFF0C;&#x7B2C;&#x56DB;&#x5C42;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x81F3;&#x8BE5;&#x5355;&#x5143;&#x65F6;&#x7684;&#x6743;&#x91CD;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF0C;&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x89C2;&#x5BDF;&#xFF0C;&#x4E09;&#x56DB;&#x5C42;&#x4E4B;&#x95F4;&#x65E0;&#x5173;&#x7684;&#x6743;&#x91CD;&#x5DF2;&#x88AB;&#x7565;&#x53BB;&#x3002;</p>
+<img src="/articles/2/pic8.png" alt="&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7684;&#x4F8B;&#x5B50;" title="&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7684;&#x4F8B;&#x5B50;">
+<p>&#x6240;&#x4EE5;&#x6574;&#x4E2A;&#x7B97;&#x6CD5;&#x662F;&#x4ECE;&#x540E;&#x5411;&#x524D;&#x9010;&#x7EA7;&#x4F20;&#x9012;&#x548C;&#x8BA1;&#x7B97;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x79F0;&#x4F5C;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x3002;</p>
+<h4 id="&#x5305;&#x542B;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x7684;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;"><a href="#&#x5305;&#x542B;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x7684;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;" class="headerlink" title="&#x5305;&#x542B;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x7684;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;"></a>&#x5305;&#x542B;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x7684;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;</h4><p>&#x73B0;&#x5728;&#x5BF9;&#x4E8E;&#x4E0A;&#x9762;&#x7684;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#xFF0C;&#x8003;&#x8651;&#x504F;&#x7F6E;&#x5355;&#x5143;&#xFF0C;&#x4E00;&#x5E76;&#x8BA1;&#x7B97;&#x5728;&#x5185;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x8F93;&#x51FA;&#x5C42;&#xFF0C;&#x4ECD;&#x4E3A;</p>
+<script type="math/tex; mode=display">\delta^{(4)} = a^{(4)} - y</script><p>&#x800C;&#x5BF9;&#x4E8E;&#x9690;&#x85CF;&#x5C42;&#xFF0C;&#x5728;&#x8BA1;&#x7B97;&#x65F6;&#xFF0C;$z^{(l)}$&#x9700;&#x8981;&#x5728;&#x7B2C;&#x4E00;&#x884C;&#x4E4B;&#x524D;&#x63D2;&#x5165;&#x4E00;&#x4E2A;$1$&#xFF0C;&#x4E5F;&#x5C31;&#x662F;</p>
+<script type="math/tex; mode=display">\delta^{(3)} = \left(\Theta^{(3)}\right)^T\delta^{(4)} \cdot\!* g\prime\left(\begin{bmatrix} 0 \newline z^{(3)} \newline \end{bmatrix}\right)</script><script type="math/tex; mode=display">\delta^{(2)} = \left(\Theta^{(2)}\right)^T\delta^{(3)} \cdot\!* g\prime\left(\begin{bmatrix} 0 \newline z^{(2)} \newline \end{bmatrix}\right)</script><p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;</p>
+<script type="math/tex; mode=display">\delta^{(l)} = \left(\Theta^{(l)}\right)^T\delta^{(l+1)} \cdot\!* g\prime\left(\begin{bmatrix} 0 \newline z^{(l)} \newline \end{bmatrix}\right)</script><p>&#x6CE8;&#x610F;&#x524D;&#x9762;&#x6C42;&#x5BFC;&#x540E;&#x6240;&#x83B7;&#x5F97;&#x7684;&#x516C;&#x5F0F;</p>
+<script type="math/tex; mode=display">\delta^{(l)} = (\Theta^{(l)})^T\delta^{(l+1)} \cdot* (a^{(l)} \cdot* (1 - a^{(l)}))</script><p>&#x5DF2;&#x7ECF;&#x4E0D;&#x9002;&#x7528;&#x4E8E;&#x5305;&#x542B;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x91CC;&#x7684;$a^{(l)}$&#x5E76;&#x6CA1;&#x6709;&#x5305;&#x542B;&#x9690;&#x85CF;&#x5C42;</p>
+<p>&#x8FD9;&#x6837;&#xFF0C;&#x5305;&#x542B;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x7684;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x4E86;&#x3002;</p>
+<p>&#x9700;&#x8981;&#x6CE8;&#x610F;&#xFF0C;&#x5728;&#x4E0D;&#x542B;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x7684;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4E2D;&#xFF0C;&#x6C42;&#x5BFC;&#x540E;&#x7684;&#x5F62;&#x5F0F;<script type="math/tex">\delta^{(l)} = (\Theta^{(l)})^T\delta^{(l+1)} \cdot* (a^{(l)} \cdot* (1 - a^{(l)}))</script>&#x7684;&#x5F62;&#x5F0F;<strong>&#x4E0D;&#x9002;&#x7528;&#x4E8E;&#x5305;&#x542B;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x7684;&#x60C5;&#x51B5;</strong>&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x7B97;&#x6CD5;&#x770B;&#x4E0A;&#x53BB;&#x8D85;&#x7EA7;&#x590D;&#x6742;&#xFF0C;&#x4F46;&#x662F;&#x7B80;&#x5355;&#x6309;&#x7167;&#x4E0B;&#x9762;&#x7684;&#x6B65;&#x9AA4;&#x6765;&#x5C31;&#x53EF;&#x4EE5;&#x8BA1;&#x7B97;&#x5F97;&#x5230;$\dfrac{\partial}{\partial \Theta_{i,j}^{(l)}}J(\Theta)$&#x3002;</p>
+<p>&#x81F3;&#x4E8E;&#x8BC1;&#x660E;&#x4EC0;&#x4E48;&#x7684;&#x2026;&#x2026;&#x53CD;&#x6B63;&#x6211;&#x662F;&#x641E;&#x4E0D;&#x5B9A;&#x4E86;&#x2026;&#x2026;</p>
+<h3 id="&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x7684;&#x5E94;&#x7528;"><a href="#&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x7684;&#x5E94;&#x7528;" class="headerlink" title="&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x7684;&#x5E94;&#x7528;"></a>&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x7684;&#x5E94;&#x7528;</h3><p>&#x6574;&#x4F53;&#x4E0A;&#xFF0C;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x6309;&#x7167;&#x4EE5;&#x4E0B;&#x6B65;&#x9AA4;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<ul>
+<li><p>&#x8BAD;&#x7EC3;&#x96C6;&#xFF1A;$\left\{ (x^{(1)} , y^{(1)}) , (x^{(2)} , y^{(2)}) , \cdots , (x^{(m)} , y^{(m)}) \right\}$</p>
+</li>
+<li><p>&#x4EE4;&#x6240;&#x6709;&#x7684;$\Delta^{(l)}_{i,j} = 0$&#xFF08;&#x7528;&#x4E8E;&#x8BA1;&#x7B97;&#x504F;&#x5BFC;&#x6570;&#x9879;&#xFF09;</p>
+</li>
+<li><p>&#x904D;&#x5386;&#x8BAD;&#x7EC3;&#x96C6;&#xFF0C;&#x5BF9;&#x4E8E;&#x7B2C;$i$&#x4E2A;&#x6837;&#x672C;$(x^{(i)} , y^{(i)})$&#xFF1A;</p>
+<ul>
+<li><p>&#x4EE4; $a^{(1)} = x^{(i)}$</p>
+</li>
+<li><p>&#x4F7F;&#x7528;&#x524D;&#x5411;&#x4F20;&#x64AD;&#x8BA1;&#x7B97; $a^{(l)}$&#xFF0C;&#x5176;&#x4E2D; $l = 2, 3, \cdots, L$</p>
+</li>
+<li><p>&#x7528;$y^{(i)}$&#xFF0C;&#x8BA1;&#x7B97; $\delta^{(L)} = a^{(L)} - y^{(i)}$</p>
+</li>
+<li><p>&#x8BA1;&#x7B97; $\delta^{(L-1)}, \delta^{(L-2)}, \cdots, \delta^{(2)}$</p>
+</li>
+<li><p>&#x4EE4; <script type="math/tex">\Delta^{(l)}_{i,j} = \Delta^{(l)}_{i,j} + a^{(l)}_j\delta^{(l+1)}_i</script><br>&#x6700;&#x540E;&#x4E00;&#x6B65;&#x4E5F;&#x53EF;&#x4EE5;&#x5411;&#x91CF;&#x5316;&#x4E3A;&#x4EE4; <script type="math/tex">\Delta^{(l)} = \Delta^{(l)} + \delta^{(l+1)}(a^{(l)})^T</script></p>
+</li>
+</ul>
+</li>
+<li><p>&#x5FAA;&#x73AF;&#x7ED3;&#x675F;&#x540E;&#xFF0C;&#x8BA1;&#x7B97;</p>
+</li>
+</ul>
+<script type="math/tex; mode=display">D^{(l)}_{i,j} := \dfrac{1}{m}\left(\Delta^{(l)}_{i,j} + \lambda\Theta^{(l)}_{i,j}\right), 如果j \neq 0</script><script type="math/tex; mode=display">D^{(l)}_{i,j} := \dfrac{1}{m}\Delta^{(l)}_{i,j}, 如果j = 0</script><p>&#x5B8C;&#x6210;&#x4E0A;&#x8FF0;&#x8BA1;&#x7B97;&#x4E4B;&#x540E;&#xFF0C;<script type="math/tex">D^{(l)}_{ij}</script>&#x5373;&#x4E3A;&#x6240;&#x6C42;&#xFF0C;&#x4FBF;&#x5F97;&#x5230;&#x4E86;$\frac \partial {\partial \Theta_{ij}^{(l)}} J(\Theta)$&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x4E00;&#x7C7B;&#x7684;&#x7B97;&#x6CD5;&#x6700;&#x4F18;&#x5316;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;&#x4E86;&#x3002;</p>
+<p>&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x5728;&#x4E00;&#x4E9B;&#x8BED;&#x8A00;&#x6216;&#x8BA1;&#x7B97;&#x6846;&#x67B6;&#x4E2D;&#xFF0C;&#x5176;&#x6240;&#x63D0;&#x4F9B;&#x7684;&#x4F18;&#x5316;&#x7B97;&#x6CD5;&#x6240;&#x9700;&#x8981;&#x63D0;&#x4F9B;&#x7684;&#x53C2;&#x6570;&#x9700;&#x8981;&#x4EE5;&#x5411;&#x91CF;&#x7684;&#x5F62;&#x5F0F;&#x63D0;&#x4F9B;&#xFF0C;&#x800C;&#x5728;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4E2D;&#xFF0C;$\Theta$&#x4EE5;&#x53CA;$D$&#x5747;&#x4E3A;&#x77E9;&#x9635;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x53EA;&#x9700;&#x8981;&#x5C06;&#x8FD9;&#x4E9B;&#x77E9;&#x9635;&#x5C55;&#x5F00;&#x6210;&#x4E00;&#x4E2A;&#x5F88;&#x957F;&#x7684;&#x5411;&#x91CF;&#x5373;&#x53EF;&#xFF0C;&#x53EA;&#x662F;&#x8981;&#x6CE8;&#x610F;&#x5C55;&#x5F00;&#x540E;&#x7684;$\Theta$&#x4E0E;$D$&#x5E94;&#x5F53;&#x5728;&#x5411;&#x91CF;&#x4E2D;&#x4E00;&#x4E00;&#x5BF9;&#x5E94;&#x3002;</p>
+<h3 id="&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x7684;&#x5411;&#x91CF;&#x5316;"><a href="#&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x7684;&#x5411;&#x91CF;&#x5316;" class="headerlink" title="&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x7684;&#x5411;&#x91CF;&#x5316;"></a>&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x7684;&#x5411;&#x91CF;&#x5316;</h3><p>&#x6CE8;&#x610F;&#x5230;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x7684;&#x6B65;&#x9AA4;&#x662F;&#x8981;&#x5728;&#x8BAD;&#x7EC3;&#x96C6;&#x4E2D;&#x8FDB;&#x884C;&#x904D;&#x5386;&#x7684;&#xFF0C;&#x90A3;&#x4E48;&#x80FD;&#x4E0D;&#x80FD;&#x901A;&#x8FC7;&#x5411;&#x91CF;&#x5316;&#x6765;&#x5B9E;&#x73B0;&#x201C;&#x4E00;&#x6B65;&#x201D;&#x7684;&#x8BA1;&#x7B97;&#x4ECE;&#x800C;&#x907F;&#x514D;&#x5FAA;&#x73AF;&#x63D0;&#x5347;&#x6548;&#x7387;&#x5462;&#xFF1F;&#x5F53;&#x7136;&#x53EF;&#x4EE5;&#xFF01;</p>
+<p>&#x8FD9;&#x91CC;&#x7684;&#x5411;&#x91CF;&#x5316;&#x9700;&#x8981;&#x7279;&#x522B;&#x6CE8;&#x610F;&#x4E00;&#x70B9;&#x7684;&#x662F;&#xFF0C;&#x524D;&#x9762;&#x4ECB;&#x7ECD;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8BA1;&#x7B97;$\delta$&#x7684;&#x6240;&#x8C13;&#x5411;&#x91CF;&#x5316;&#x516C;&#x5F0F;&#x4E2D;&#xFF0C;&#x8F93;&#x51FA;&#x5C42;&#x548C;&#x9690;&#x85CF;&#x5C42;&#x5BF9;&#x5E94;&#x7684;&#x5411;&#x91CF;&#x5747;&#x4E3A;<strong>&#x5217;&#x5411;&#x91CF;</strong>&#xFF0C;&#x7136;&#x800C;&#x5728;&#x6211;&#x4EEC;&#x4E3A;&#x4E86;&#x5B9E;&#x73B0;&#x201C;&#x4E00;&#x6B65;&#x201D;&#x8BA1;&#x7B97;&#x6240;&#x8FDB;&#x884C;&#x7684;&#x5411;&#x91CF;&#x5316;&#x4E2D;&#xFF0C;&#x7531;&#x4E8E;&#x8BAD;&#x7EC3;&#x96C6;&#x7684;&#x6837;&#x672C;&#x5747;&#x662F;&#x4EE5;&#x884C;&#x5411;&#x91CF;&#x7684;&#x5F62;&#x5F0F;&#x7ED9;&#x51FA;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x8F93;&#x51FA;&#x5C42;&#x4E0E;&#x9690;&#x85CF;&#x5C42;&#x5BF9;&#x5E94;&#x7684;&#x5411;&#x91CF;&#x4E3A;<strong>&#x884C;&#x5411;&#x91CF;</strong>&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x4E2A;&#x5730;&#x65B9;&#x5C31;&#x6BD4;&#x8F83;&#x7ED5;&#xFF0C;&#x9700;&#x8981;&#x591A;&#x60F3;&#x60F3;&#x3002;</p>
+<p>&#x56E0;&#x4E3A;&#x61D2;&#x764C;&#x53D1;&#x4F5C;&#xFF0C;&#x6240;&#x4EE5;$l$&#x7684;&#x8303;&#x56F4;&#x5C31;&#x4E0D;&#x6807;&#x4E86;&#xFF08;&#x53C8;&#x9003;</p>
+<p>&#x5411;&#x91CF;&#x5316;&#x540E;&#x7684;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x6B65;&#x9AA4;&#x4E3A;&#xFF1A;</p>
+<ul>
+<li><p>&#x8BAD;&#x7EC3;&#x96C6; $X = \begin{bmatrix} (x^{(1)})^T \newline (x^{(2)})^T \newline \vdots \newline (x^{(m)})^T \newline \end{bmatrix} , y = \begin{bmatrix} (y^{(1)})^T \newline (y^{(2)})^T \newline \vdots \newline (y^{(m)})^T \newline \end{bmatrix}$</p>
+</li>
+<li><p>&#x4EE4;&#x6240;&#x6709;&#x7684;$\Delta^{(l)} = \textbf{0}$</p>
+</li>
+<li><p>&#x524D;&#x5411;&#x4F20;&#x64AD;:</p>
+<ul>
+<li>&#x521D;&#x59CB;&#x5316;<script type="math/tex; mode=display">a^{(1)} = X</script></li>
+<li>&#x8BA1;&#x7B97;&#x9690;&#x85CF;&#x5C42;&#x548C;&#x8F93;&#x51FA;&#x5C42;<script type="math/tex; mode=display">a^{(l)} = g\left(a^{l-1} \left[\Theta^{(l-1)}\right]^T\right)</script><script type="math/tex; mode=display">z^{(l)} = a^{l-1} \left[\Theta^{(l-1)}\right]^T</script></li>
+</ul>
+</li>
+<li><p>&#x53CD;&#x5411;&#x4F20;&#x64AD;:</p>
+<ul>
+<li>&#x521D;&#x59CB;&#x5316;&#xFF08;&#x8BA1;&#x7B97;&#x8F93;&#x51FA;&#x5C42;&#xFF09;&#xFF1A;<script type="math/tex">\delta^{(L)} = a^{(L)} - y</script></li>
+<li><p>&#x8BA1;&#x7B97;&#x9690;&#x85CF;&#x5C42;&#xFF0C;&#x4EE4;&#xFF1A;<script type="math/tex">\textbf{A} = \left[\delta^{(l+1)}\Theta^{(l)} \cdot\!* g\left( \left[ \left. \textbf{1} \right| z^{(l)} \right] \right)\right]</script><br>  &#x5219;&#x6709;&#xFF1A;<script type="math/tex">\delta^{(l)} = \left[ \left. A_{*2} \right| \left. A_{*3} \right| \cdots \left| A_{*s_l} \right. \right]</script></p>
+</li>
+<li><p>&#x8BA1;&#x7B97;$\Delta$&#xFF1A;<script type="math/tex">\Delta^{(l)} = \delta^{(l+1)}a^{(l)}</script></p>
+</li>
+</ul>
+</li>
+<li><p>&#x8BA1;&#x7B97;$D$&#xFF1A;<script type="math/tex">D^{(l)} = \Delta^{(l)} + \frac{\lambda}{m} \left[ \left. \textbf{1} \right| \left. \Theta^{(l)}_{*2} \right| \left. \Theta^{(l)}_{*3} \right| \cdots \left| \Theta^{(l)}_{*s_l} \right. \right]</script></p>
+</li>
+</ul>
+<h3 id="&#x68AF;&#x5EA6;&#x68C0;&#x9A8C;"><a href="#&#x68AF;&#x5EA6;&#x68C0;&#x9A8C;" class="headerlink" title="&#x68AF;&#x5EA6;&#x68C0;&#x9A8C;"></a>&#x68AF;&#x5EA6;&#x68C0;&#x9A8C;</h3><p>&#x663E;&#x800C;&#x6613;&#x89C1;&#x7684;&#x4E00;&#x4EF6;&#x4E8B;&#x60C5;&#x662F;&#xFF0C;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x8BA1;&#x7B97;&#x68AF;&#x5EA6;&#x662F;&#x76F8;&#x5F53;&#x590D;&#x6742;&#x7684;&#x2026;&#x2026;&#x6240;&#x4EE5;&#x5F88;&#x5BB9;&#x6613;&#x4F1A;&#x5728;&#x4E00;&#x4E9B;&#x7EC6;&#x8282;&#x4E0A;&#x51FA;&#x73B0;Bug&#x5BFC;&#x81F4;&#x8BA1;&#x7B97;&#x51FA;&#x7684;&#x5E76;&#x4E0D;&#x662F;&#x5B9E;&#x9645;&#x60C5;&#x51B5;&#x4E0B;&#x7684;&#x68AF;&#x5EA6;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x8FD9;&#x91CC;&#x63D0;&#x4F9B;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x6765;&#x68C0;&#x9A8C;&#x68AF;&#x5EA6;&#xFF0C;&#x4EE5;&#x68C0;&#x9A8C;&#x7B97;&#x6CD5;&#x7684;&#x6B63;&#x786E;&#x6027;&#x3002;</p>
+<p>&#x5728;&#x5F88;&#x591A;&#x9AD8;&#x6570;&#x6559;&#x6750;&#x91CC;&#xFF0C;&#x5BFC;&#x6570;&#x7684;&#x5B9A;&#x4E49;&#x662F;</p>
+<script type="math/tex; mode=display">f\prime(x) = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x} = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}</script><p>&#x8FD9;&#x4E2A;&#x662F;&#x5355;&#x8FB9;&#x5BFC;&#x6570;&#xFF0C;&#x8FD9;&#x91CC;&#x7528;&#x5230;&#x7684;&#x662F;&#x53CC;&#x8FB9;&#x5BFC;&#x6570;</p>
+<script type="math/tex; mode=display">f\prime(x) = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x} = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x - \Delta x)}{2 \Delta x}</script><p>&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x7A0B;&#x5E8F;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x662F;&#x53D6;&#x4E0D;&#x4E86;&#x201C;&#x65E0;&#x9650;&#x5C0F;&#x201D;&#x8FD9;&#x4E2A;&#x503C;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x9009;&#x4E00;&#x4E2A;&#x76F8;&#x5BF9;&#x5F88;&#x5C0F;&#x7684;&#x503C;&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x8003;&#x8651;&#x5230;&#x8BA1;&#x7B97;&#x7684;&#x7CBE;&#x5EA6;&#xFF0C;&#x4E5F;&#x4E0D;&#x80FD;&#x592A;&#x5C0F;&#x3002;&#x901A;&#x5E38;&#xFF0C;&#x53D6;$10^{-4}$&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x7EFC;&#x4E0A;&#xFF0C;&#x5E26;&#x5165;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;&#xFF0C;&#x6709;</p>
+<script type="math/tex; mode=display">\dfrac{\partial}{\partial\Theta}J(\Theta) \approx \dfrac{J(\Theta + \epsilon) - J(\Theta - \epsilon)}{2\epsilon}</script><p>&#x5BF9;&#x4E8E;&#x591A;&#x4E2A;$\Theta$&#x6765;&#x8BF4;&#xFF0C;&#x5BF9;&#x4E8E;$\Theta_j$&#xFF0C;&#x6709;</p>
+<script type="math/tex; mode=display">\dfrac{\partial}{\partial\Theta_j}J(\Theta) \approx \dfrac{J(\Theta_1, \dots, \Theta_j + \epsilon, \dots, \Theta_n) - J(\Theta_1, \dots, \Theta_j - \epsilon, \dots, \Theta_n)}{2\epsilon}</script><p>&#x901A;&#x8FC7;&#x4E0A;&#x9762;&#x7684;&#x7B97;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x5F88;&#x63A5;&#x8FD1;&#x771F;&#x5B9E;&#x68AF;&#x5EA6;&#x7684;&#x8FD1;&#x4F3C;&#x503C;&#xFF0C;&#x6709;&#x4E86;&#x8FD9;&#x4E2A;&#x8FD1;&#x4F3C;&#x503C;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x62FF;&#x6765;&#x548C;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x6240;&#x8BA1;&#x7B97;&#x51FA;&#x6765;&#x7684;&#x68AF;&#x5EA6;&#x8FDB;&#x884C;&#x5BF9;&#x6BD4;&#xFF0C;&#x6765;&#x68C0;&#x9A8C;&#x6211;&#x4EEC;&#x6240;&#x7F16;&#x5199;&#x7684;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x7684;&#x6B63;&#x786E;&#x6027;&#x3002;</p>
+<p>&#x5728;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E2D;&#xFF0C;&#x8981;&#x8FDB;&#x884C;&#x68AF;&#x5EA6;&#x68C0;&#x9A8C;&#xFF0C;&#x6240;&#x8981;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>&#x5B9E;&#x73B0;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;</li>
+<li>&#x5B9E;&#x73B0;&#x4E0A;&#x9762;&#x7684;&#x8FD1;&#x4F3C;&#x68AF;&#x5EA6;&#x7684;&#x7B97;&#x6CD5;</li>
+<li>&#x786E;&#x4FDD;&#x4E24;&#x8005;&#x7684;&#x8F93;&#x51FA;&#x503C;&#x662F;&#x5426;&#x76F8;&#x540C;&#xFF08;&#x76F8;&#x8FD1;&#xFF09;</li>
+<li>&#x5728;&#x5B9E;&#x9645;&#x8FD0;&#x884C;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x7A0B;&#x5E8F;&#x7684;&#x65F6;&#x5019;&#x5173;&#x95ED;&#x68AF;&#x5EA6;&#x68C0;&#x9A8C;&#xFF08;&#x8FDB;&#x884C;&#x68AF;&#x5EA6;&#x68C0;&#x9A8C;&#x592A;&#x8D39;&#x65F6;&#x95F4;&#xFF0C;&#x786E;&#x4FDD;&#x6B63;&#x786E;&#x540E;&#x65E0;&#x9700;&#x91CD;&#x590D;&#x68C0;&#x9A8C;&#xFF09;&#x3002;</li>
+</ul>
+<p><br></p>
+<h3 id="&#x968F;&#x673A;&#x521D;&#x59CB;&#x5316;"><a href="#&#x968F;&#x673A;&#x521D;&#x59CB;&#x5316;" class="headerlink" title="&#x968F;&#x673A;&#x521D;&#x59CB;&#x5316;"></a>&#x968F;&#x673A;&#x521D;&#x59CB;&#x5316;</h3><p>&#x548C;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x4E0E;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x4E00;&#x6837;&#xFF0C;&#x6709;&#x4E86;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;&#x4EE5;&#x53CA;&#x6700;&#x4F18;&#x5316;&#x4EE3;&#x4EF7;&#x51FD;&#x6570;&#x7684;&#x65B9;&#x6CD5;&#x540E;&#xFF0C;&#x5728;&#x8FDB;&#x884C;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5047;&#x8BBE;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;$\theta$&#x9700;&#x8981;&#x6709;&#x4E00;&#x4E2A;&#x521D;&#x59CB;&#x72B6;&#x6001;&#xFF0C;&#x7136;&#x540E;&#x7A0B;&#x5E8F;&#x4EE5;&#x6B64;&#x521D;&#x59CB;&#x72B6;&#x6001;&#x6765;&#x8FDB;&#x884C;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x66F4;&#x52A0;&#x9AD8;&#x7EA7;&#x7684;&#x7B97;&#x6CD5;&#x3002;</p>
+<p>&#x5728;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x548C;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#xFF0C;&#x6700;&#x7701;&#x4E8B;&#x7684;&#x4E00;&#x79CD;&#x505A;&#x6CD5;&#x662F;&#x4EE4;$\theta = \textbf{0}$&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x4EE4;$\theta$&#x7684;&#x6240;&#x6709;&#x5143;&#x7D20;&#x5747;&#x4E3A;$0$&#x3002;&#x7136;&#x800C;&#xFF0C;&#x8FD9;&#x79CD;&#x505A;&#x6CD5;&#x5728;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x4E2D;&#x4F1A;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x4EE5;&#x4E00;&#x4E2A;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4E3A;&#x4F8B;&#xFF0C;&#x8FD9;&#x91CC;&#x753B;&#x51FA;&#x4E86;&#x504F;&#x7F6E;&#x5355;&#x5143;&#xFF1A;</p>
+<img src="/articles/2/pic9.png" alt="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x4F8B;&#x5B50;" title="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x4F8B;&#x5B50;">
+<p>&#x5982;&#x679C;&#x521D;&#x59CB;&#x72B6;&#x6001;&#x4EE4;&#x6240;&#x6709;&#x7684;$\Theta$&#x7684;&#x6240;&#x6709;&#x5143;&#x7D20;&#x5747;&#x4E3A;$0$&#xFF0C;&#x4E5F;&#x5C31;&#x4EE3;&#x8868;&#x7740;&#x8BA9;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x6743;&#x503C;&#x90FD;&#x4E3A;0&#x65F6;&#xFF0C;&#x7ED3;&#x5408;&#x4E0A;&#x9762;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x7684;&#x516C;&#x5F0F;&#xFF0C;&#x4F1A;&#x51FA;&#x73B0;&#x4E00;&#x4E2A;&#x5F88;&#x795E;&#x5947;&#x7684;&#x73B0;&#x8C61;&#xFF1A;&#x4E0A;&#x9762;&#x989C;&#x8272;&#x76F8;&#x540C;&#x7684;&#x6743;&#x503C;&#x5B9E;&#x9645;&#x4E0A;&#x503C;&#x4E5F;&#x662F;&#x76F8;&#x540C;&#x7684;&#x3002;&#x800C;&#x8FD9;&#x5BFC;&#x81F4;&#x4E86;&#x9690;&#x85CF;&#x5C42;&#x4E2D;&#x540C;&#x4E00;&#x5C42;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;&#x9664;&#x53BB;&#x504F;&#x7F6E;&#x5355;&#x5143;&#x4EE5;&#x5916;&#x5176;&#x4ED6;&#x6240;&#x6709;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;&#x90FD;&#x662F;&#x76F8;&#x540C;&#x7684;&#xFF0C;&#x6240;&#x505A;&#x7684;&#x8BA1;&#x7B97;&#x4E5F;&#x662F;&#x91CD;&#x590D;&#x7684;&#xFF0C;&#x8FD9;&#x4E5F;&#x8868;&#x793A;&#x6574;&#x4E2A;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4E2D;&#x5927;&#x91CF;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;&#x90FD;&#x662F;&#x5197;&#x4F59;&#x7684;&#xFF0C;&#x8FD9;&#x663E;&#x7136;&#x65E2;&#x6D6A;&#x8D39;&#x8BA1;&#x7B97;&#x8D44;&#x6E90;&#xFF0C;&#x4E5F;&#x5F97;&#x4E0D;&#x5230;&#x5F88;&#x597D;&#x7684;&#x7ED3;&#x679C;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x89E3;&#x51B3;&#x7684;&#x529E;&#x6CD5;&#x4E5F;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x968F;&#x673A;&#x521D;&#x59CB;&#x5316;&#x5373;&#x53EF;&#xFF0C;&#x5373;&#x7ED9;&#x6BCF;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x4E00;&#x4E2A;&#x968F;&#x673A;&#x503C;&#x5373;&#x53EF;&#xFF0C;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4EE4;&#x6BCF;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x53D6;&#x503C;&#x90FD;&#x5728;&#x533A;&#x95F4;$[-\epsilon, \epsilon]$&#x4E0A;&#x3002;</p>
+<p><br></p>
+<h2 id="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x6A21;&#x578B;&#x7684;&#x6784;&#x5EFA;&#x8981;&#x70B9;"><a href="#&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x6A21;&#x578B;&#x7684;&#x6784;&#x5EFA;&#x8981;&#x70B9;" class="headerlink" title="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x6A21;&#x578B;&#x7684;&#x6784;&#x5EFA;&#x8981;&#x70B9;"></a>&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x6A21;&#x578B;&#x7684;&#x6784;&#x5EFA;&#x8981;&#x70B9;</h2><ul>
+<li>&#x8F93;&#x5165;&#x5C42;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;&#x6570;&#x91CF;&#xFF1A;&#x7279;&#x5F81;&#x6570;&#x91CF;</li>
+<li>&#x8F93;&#x51FA;&#x5C42;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;&#x6570;&#x91CF;&#xFF1A;&#x9700;&#x8981;&#x5224;&#x522B;&#x7684;&#x7C7B;&#x7684;&#x6570;&#x91CF;</li>
+<li>&#x9690;&#x85CF;&#x5C42;&#xFF1A;&#x901A;&#x5E38;&#x4E00;&#x5C42;&#x5C31;&#x591F;</li>
+<li>&#x9690;&#x85CF;&#x5C42;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;&#x6570;&#x91CF;&#xFF1A;&#x901A;&#x5E38;&#x9690;&#x85CF;&#x5355;&#x5143;&#x8D8A;&#x591A;&#x8D8A;&#x597D;&#xFF08;&#x8BA1;&#x7B97;&#x91CF;&#x4E5F;&#x8D8A;&#x5927;&#xFF09;&#xFF0C;&#x901A;&#x5E38;&#x7A0D;&#x591A;&#x4E8E;&#x7279;&#x5F81;&#x6570;&#x91CF;&#xFF0C;&#x5BF9;&#x4E8E;&#x591A;&#x4E2A;&#x9690;&#x85CF;&#x5C42;&#x7684;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#xFF0C;&#x901A;&#x5E38;&#x5404;&#x9690;&#x85CF;&#x5C42;&#x7684;&#x903B;&#x8F91;&#x5355;&#x5143;&#x6570;&#x91CF;&#x76F8;&#x540C;&#x3002;</li>
+</ul>
+<p><br></p>
+<h2 id="&#x603B;&#x7ED3;"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a>&#x603B;&#x7ED3;</h2><p>&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x662F;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x91CC;&#x6BD4;&#x8F83;&#x91CD;&#x8981;&#x7684;&#x4E00;&#x5757;&#xFF0C;&#x4E4B;&#x540E;&#x9AD8;&#x7AEF;&#x7684;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x5176;&#x5B9E;&#x4E5F;&#x662F;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#xFF0C;&#x4F46;&#x662F;&#x5C42;&#x6570;&#x66F4;&#x591A;&#xFF0C;&#x6240;&#x4EE5;&#x53EB;&#x6DF1;&#x5EA6;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x3002;&#x4E2A;&#x4EBA;&#x611F;&#x89C9;&#xFF0C;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x76F8;&#x5BF9;&#x4E8E;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x4E0E;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x6765;&#x8BF4;&#xFF0C;&#x6700;&#x5927;&#x7684;&#x597D;&#x5904;&#x5C31;&#x662F;&#x4E0D;&#x9700;&#x8981;&#x518D;&#x53BB;&#x60F3;&#x5047;&#x8BBE;&#x51FD;&#x6570;&#x600E;&#x4E48;&#x6784;&#x9020;&#x4E86;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x628A;&#x7279;&#x5F81;&#x6254;&#x7ED9;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#xFF0C;&#x7531;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x81EA;&#x884C;&#x5BFB;&#x627E;&#x89C4;&#x5F8B;&#x3002;&#x4E0D;&#x8FC7;&#x8FD9;&#x5E76;&#x4E0D;&#x4EE3;&#x8868;&#x6211;&#x4EEC;&#x5C31;&#x4E0D;&#x9700;&#x8981;&#x5173;&#x5FC3;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x6784;&#x9020;&#x4E86;&#xFF0C;&#x7279;&#x5F81;&#x7684;&#x5206;&#x6790;&#x548C;&#x63D0;&#x53D6;&#x4F9D;&#x7136;&#x662F;&#x76F8;&#x5F53;&#x91CD;&#x8981;&#x7684;&#xFF0C;&#x4E00;&#x5957;&#x597D;&#x7684;&#x7279;&#x5F81;&#x5F80;&#x5F80;&#x80FD;&#x5927;&#x5927;&#x63D0;&#x9AD8;&#x9884;&#x6D4B;&#x7684;&#x51C6;&#x786E;&#x5EA6;&#x3002;&#x8FD9;&#x4E00;&#x9635;&#x5B50;&#x56E0;&#x4E3A;&#x8BFE;&#x7A0B;&#x8981;&#x6C42;&#xFF0C;&#x53C2;&#x52A0;&#x4E86;CCF&#x7684;&#x5927;&#x6570;&#x636E;&#x7ADE;&#x8D5B;&#x7684;&#x4E00;&#x4E2A;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x7684;&#x9898;&#x76EE;&#xFF0C;&#x6BD4;&#x8D5B;&#x7FA4;&#x91CC;&#x5404;&#x8DEF;&#x5927;&#x795E;&#x8BA8;&#x8BBA;&#x7684;&#x91CD;&#x70B9;&#x5C31;&#x662F;&#x600E;&#x4E48;&#x641E;&#x51FA;&#x4E00;&#x5957;&#x5F3A;&#x7279;&#x5F81;&#x6765;&#x3002;</p>
+<p>&#x4EE5;&#x4E0A;&#x5C31;&#x662F;&#x6709;&#x5173;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7684;&#x76F8;&#x5173;&#x77E5;&#x8BC6;&#x4E86;&#xFF0C;&#x8001;&#x5B9E;&#x8BF4;&#xFF0C;&#x786E;&#x5B9E;&#x633A;&#x590D;&#x6742;&#x7684;&#x2026;&#x2026;&#x4E0D;&#x8FC7;&#x4ECE;&#x603B;&#x4F53;&#x4E0A;&#x6765;&#x8BF4;&#xFF0C;&#x5957;&#x8DEF;&#x5176;&#x5B9E;&#x548C;&#x524D;&#x4E00;&#x7BC7;&#x662F;&#x76F8;&#x540C;&#x7684;&#x3002;&#x800C;&#x4E14;&#x5176;&#x5B9E;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#x73B0;&#x5728;&#x7684;&#x5F88;&#x591A;&#x6846;&#x67B6;&#x5DF2;&#x7ECF;&#x5B9E;&#x73B0;&#x597D;&#x4E86;&#xFF0C;&#x8FD9;&#x4E9B;&#x8F6E;&#x5B50;&#x90FD;&#x662F;&#x4E0D;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x5728;&#x9020;&#x7684;&#xFF0C;&#x9700;&#x8981;&#x505A;&#x7684;&#x4EC5;&#x4EC5;&#x662F;&#x4F20;&#x6570;&#x636E;&#x8C03;&#x53C2;&#x6570;&#x800C;&#x5DF2;&#x3002;</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/学习笔记/">学习笔记</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Coursera/">Coursera</a><a href="/tags/机器学习/">机器学习</a><a href="/tags/神经网络/">神经网络</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/kawaiiQ/kawaiiHacker" target="_blank">kawaiiHacker</a>
+    </br>
+    
+    &copy; 2018 _kawaiiQ
+    
+  </p>
+</footer>
+    
+    
+<script>
+  widget_settings = {
+    maxDistance: 15,
+    sensitive: 0.01
+  };
+</script>
+<script src="/js/logo-widget.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://kawaiiq.xyz/articles/14/</loc>
+    <lastmod>2018-05-17T02:24:56.554Z</lastmod>
+    <data>
+        <display>
+        <title>简单讲讲，卷积神经网络是啥？</title>
+        <pubTime>2018-05-15T03:34:56.000Z</pubTime>
+        
+        <tag>模式识别</tag>
+         
+        <tag>神经网络</tag>
+         
+        <tag>深度学习</tag>
+         
+        <tag>卷积神经网络（CNN）</tag>
+         
+         
+           
+             
+              <breadCrumb title="简单讲讲" url="http://kawaiiq.xyz/categories/%E7%AE%80%E5%8D%95%E8%AE%B2%E8%AE%B2/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kawaiiq.xyz/articles/9/</loc>
+    <lastmod>2018-05-15T03:58:51.681Z</lastmod>
+    <data>
+        <display>
+        <title>简单讲讲，并发程序设计有啥原则?</title>
+        <pubTime>2018-02-24T08:13:26.000Z</pubTime>
+        
+        <tag>并发程序设计</tag>
+         
+         
+           
+             
+              <breadCrumb title="简单讲讲" url="http://kawaiiq.xyz/categories/%E7%AE%80%E5%8D%95%E8%AE%B2%E8%AE%B2/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kawaiiq.xyz/articles/12/</loc>
+    <lastmod>2018-05-15T03:56:01.756Z</lastmod>
+    <data>
+        <display>
+        <title>简单讲讲，什么是贝叶斯决策？</title>
+        <pubTime>2018-03-08T13:59:47.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>模式识别</tag>
+         
+        <tag>统计决策</tag>
+         
+         
+           
+             
+              <breadCrumb title="简单讲讲" url="http://kawaiiq.xyz/categories/%E7%AE%80%E5%8D%95%E8%AE%B2%E8%AE%B2/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kawaiiq.xyz/articles/11/</loc>
+    <lastmod>2018-05-15T03:42:22.044Z</lastmod>
+    <data>
+        <display>
+        <title>多线程程序开发踩坑记</title>
+        <pubTime>2018-03-02T02:29:52.000Z</pubTime>
+        
+        <tag>并发程序设计</tag>
+         
+         
+           
+             
+              <breadCrumb title="实践" url="http://kawaiiq.xyz/categories/%E5%AE%9E%E8%B7%B5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kawaiiq.xyz/articles/4/</loc>
+    <lastmod>2018-05-15T03:37:46.562Z</lastmod>
+    <data>
+        <display>
+        <title>Coursera《机器学习》学习笔记（四）：支持向量机篇</title>
+        <pubTime>2018-01-11T13:26:21.000Z</pubTime>
+        
+        <tag>Coursera</tag>
+         
+        <tag>机器学习</tag>
+         
+        <tag>支持向量机（SVM）</tag>
+         
+         
+           
+             
+              <breadCrumb title="学习笔记" url="http://kawaiiq.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kawaiiq.xyz/articles/2/</loc>
+    <lastmod>2018-05-15T03:37:17.598Z</lastmod>
+    <data>
+        <display>
+        <title>Coursera《机器学习》学习笔记（二）：神经网络篇</title>
+        <pubTime>2017-11-06T16:24:19.000Z</pubTime>
+        
+        <tag>Coursera</tag>
+         
+        <tag>机器学习</tag>
+         
+        <tag>神经网络</tag>
+         
+         
+           
+             
+              <breadCrumb title="学习笔记" url="http://kawaiiq.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kawaiiq.xyz/articles/1/</loc>
+    <lastmod>2018-05-15T03:37:10.345Z</lastmod>
+    <data>
+        <display>
+        <title>Coursera《机器学习》学习笔记（一）：线性回归与逻辑回归篇</title>
+        <pubTime>2017-11-05T14:35:00.000Z</pubTime>
+        
+        <tag>Coursera</tag>
+         
+        <tag>机器学习</tag>
+         
+        <tag>线性回归</tag>
+         
+        <tag>逻辑回归</tag>
+         
+         
+           
+             
+              <breadCrumb title="学习笔记" url="http://kawaiiq.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kawaiiq.xyz/articles/0/</loc>
+    <lastmod>2018-05-15T03:27:50.841Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2017-10-24T16:00:00.000Z</pubTime>
+        
+        <tag>Nothing Important</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常" url="http://kawaiiq.xyz/categories/%E6%97%A5%E5%B8%B8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kawaiiq.xyz/articles/7/</loc>
+    <lastmod>2018-05-15T02:48:06.074Z</lastmod>
+    <data>
+        <display>
+        <title>Coursera《机器学习》学习笔记（七）：大规模机器学习篇</title>
+        <pubTime>2018-02-04T11:00:23.000Z</pubTime>
+        
+        <tag>Coursera</tag>
+         
+        <tag>机器学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="学习笔记" url="http://kawaiiq.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kawaiiq.xyz/articles/8/</loc>
+    <lastmod>2018-05-15T02:48:02.748Z</lastmod>
+    <data>
+        <display>
+        <title>Coursera《机器学习》学习笔记（八）：OCR篇</title>
+        <pubTime>2018-02-09T08:18:38.000Z</pubTime>
+        
+        <tag>Coursera</tag>
+         
+        <tag>机器学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="学习笔记" url="http://kawaiiq.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kawaiiq.xyz/articles/6/</loc>
+    <lastmod>2018-05-15T02:47:50.009Z</lastmod>
+    <data>
+        <display>
+        <title>Coursera《机器学习》学习笔记（六）：推荐系统篇</title>
+        <pubTime>2018-02-02T16:01:42.000Z</pubTime>
+        
+        <tag>Coursera</tag>
+         
+        <tag>机器学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="学习笔记" url="http://kawaiiq.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kawaiiq.xyz/articles/5/</loc>
+    <lastmod>2018-05-15T02:47:44.372Z</lastmod>
+    <data>
+        <display>
+        <title>Coursera《机器学习》学习笔记（五）：PCA、K均值与高斯分布篇</title>
+        <pubTime>2018-02-01T16:45:21.000Z</pubTime>
+        
+        <tag>Coursera</tag>
+         
+        <tag>机器学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="学习笔记" url="http://kawaiiq.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kawaiiq.xyz/articles/3/</loc>
+    <lastmod>2018-05-15T02:47:34.968Z</lastmod>
+    <data>
+        <display>
+        <title>Coursera《机器学习》学习笔记（三）：算法评估篇</title>
+        <pubTime>2018-01-10T18:00:00.000Z</pubTime>
+        
+        <tag>Coursera</tag>
+         
+        <tag>机器学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="学习笔记" url="http://kawaiiq.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://kawaiiq.xyz/articles/10/</loc>
+    <lastmod>2018-03-09T13:47:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>服务改到了Coding Pages上</title>
+        <pubTime>2018-02-28T11:51:16.000Z</pubTime>
+        
+        <tag>Nothing Important</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常" url="http://kawaiiq.xyz/categories/%E6%97%A5%E5%B8%B8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+    
+</urlset>
