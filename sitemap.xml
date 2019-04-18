@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://kawaiiq.xyz/about/index.html</loc>
+    
+    <lastmod>2019-04-18T03:40:39.694Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://kawaiiq.xyz/articles/12/</loc>
     
     <lastmod>2019-04-18T02:29:45.115Z</lastmod>
@@ -96,13 +103,6 @@
     <loc>http://kawaiiq.xyz/works/index.html</loc>
     
     <lastmod>2018-03-07T07:02:57.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://kawaiiq.xyz/about/index.html</loc>
-    
-    <lastmod>2018-02-26T15:23:12.000Z</lastmod>
     
   </url>
   
