@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-  <meta charset="utf-8">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
   <title>Coursera《机器学习》学习笔记（一）：线性回归与逻辑回归篇 | _kawaiiQ&#39;s blog</title>
 
@@ -18,41 +18,41 @@
 
   
   
-  <meta name="keywords" content="Coursera,机器学习,线性回归,逻辑回归">
+  <meta name="keywords" content="机器学习,Coursera,线性回归,逻辑回归">
   
 
   <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="Coursera《机器学习》学习笔记（一）：线性回归与逻辑回归篇"/>
+  <meta property="og:title" content="Coursera《机器学习》学习笔记（一）：线性回归与逻辑回归篇">
 
-  <meta property="og:site_name" content="_kawaiiQ&#39;s blog"/>
+  <meta property="og:site_name" content="_kawaiiQ&#39;s blog">
 
   
-  <meta property="og:image" content="/favicon.ico"/>
+  <meta property="og:image" content="/favicon.ico">
   
 
   <link href="/favicon.ico" rel="icon">
   <link rel="alternate" href="/atom.xml" title="_kawaiiQ&#39;s blog" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
 
 <body>
-<div class="blog">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="blog">
   <div class="content">
 
     <header>
   <div class="site-branding">
     <h1 class="site-logo">
       <div>
-        <a href="/"><img src="/images/logo.png" /></a>
+        <a href="/"><img src="/images/logo.png"></a>
         
-          <a href="/"><img id="logo-widget" src="/images/widget.png" /></a>
+          <a href="/"><img id="logo-widget" src="/images/widget.png"></a>
         
       </div>
     </h1>
@@ -100,7 +100,7 @@
       
         <p><a href="https://www.coursera.org/learn/machine-learning" target="_blank" rel="external">&#x300A;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x300B;</a>&#x8FD9;&#x95E8;&#x8BFE;&#x975E;&#x5E38;&#x9002;&#x5408;&#x521A;&#x521A;&#x63A5;&#x89E6;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x5165;&#x95E8;&#x8005;&#xFF0C;&#x8BB2;&#x7684;&#x5185;&#x5BB9;&#x6D45;&#x663E;&#x6613;&#x61C2;&#xFF0C;&#x5FAA;&#x5E8F;&#x6E10;&#x8FDB;&#xFF0C;&#x80FD;&#x591F;&#x5F88;&#x5FEB;&#x5BF9;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x6709;&#x521D;&#x6B65;&#x7684;&#x6982;&#x5FF5;&#x548C;&#x57FA;&#x672C;&#x7684;&#x5B9E;&#x8DF5;&#x80FD;&#x529B;&#x3002;&#x5BF9;&#x4E8E;&#x521A;&#x521A;&#x5165;&#x95E8;&#x6216;&#x8005;&#x8FD8;&#x6CA1;&#x5165;&#x95E8;&#x7684;&#x540C;&#x5B66;&#x6765;&#x8BF4;&#xFF0C;&#x4E2A;&#x4EBA;&#x8FD8;&#x662F;&#x5341;&#x5206;&#x63A8;&#x8350;&#x7684;&#xFF08;&#x867D;&#x7136;&#x6211;&#x4E5F;&#x662F;&#x521A;&#x521A;&#x5165;&#x95E8;&#x2026;&#x2026;&#xFF09;&#x3002;</p>
 <p>&#x5468;&#x4E00;&#x300A;&#x6A21;&#x5F0F;&#x8BC6;&#x522B;&#x4E0E;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x300B;&#x8BFE;&#x4E0A;&#x8001;&#x5E08;&#x4E13;&#x95E8;&#x63D0;&#x5230;&#x4E86;Coursera&#x4E0A;&#x7684;&#x8FD9;&#x95E8;&#x8BFE;&#xFF0C;&#x7136;&#x540E;&#x5F3A;&#x8C03;&#x8BF4;&#x8BA9;&#x6211;&#x4EEC;&#x4E0D;&#x8981;&#x770B;&#xFF0C;&#x56E0;&#x4E3A;&#x5185;&#x5BB9;&#x592A;&#x521D;&#x7EA7;&#xFF0C;&#x6211;&#x4EEC;&#x90FD;&#x662F;&#x7814;&#x7A76;&#x751F;&#x4E86;&#xFF0C;&#x7136;&#x540E;&#x63A8;&#x8350;&#x4E86;&#x4E00;&#x5927;&#x5806;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x7684;&#x4E13;&#x4E1A;&#x4E66;&#x7C4D;&#x2026;&#x2026;&#x5927;&#x6982;&#x662F;&#x89C9;&#x5F97;&#x6211;&#x5728;&#x672C;&#x79D1;&#x5DF2;&#x7ECF;&#x4EC0;&#x4E48;&#x90FD;&#x5B66;&#x4F1A;&#x4E86;&#x5427;&#xFF0C;&#x7136;&#x800C;&#x50CF;&#x6211;&#x8FD9;&#x79CD;&#x7684;&#xFF0C;&#x5C31;&#x89C9;&#x5F97;&#x2026;&#x2026;</p>
-<p><img src="/images/this-is-really-terrible.jpg" alt=""></p>
+<p><img src="/images/this-is-really-terrible.jpg" alt></p>
 <p>&#x8FD9;&#x4E00;&#x7BC7;&#x4E3B;&#x8981;&#x662F;&#x5BF9;&#x8FD9;&#x95E8;&#x8BFE;&#x524D;&#x4E09;&#x5468;&#x77E5;&#x8BC6;&#x70B9;&#x7684;&#x6574;&#x7406;&#x4E0E;&#x603B;&#x7ED3;&#xFF0C;&#x4E3B;&#x8981;&#x6D89;&#x53CA;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x548C;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x4E24;&#x5927;&#x5757;&#xFF0C;&#x5E76;&#x5728;&#x4E00;&#x5F00;&#x5934;&#x7B80;&#x5355;&#x666E;&#x53CA;&#x4E86;&#x4E00;&#x4E0B;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x7684;&#x76F8;&#x5173;&#x6982;&#x5FF5;&#x3002;</p>
 <a id="more"></a>
 <h2 id="&#x9700;&#x8981;&#x4EC0;&#x4E48;&#x77E5;&#x8BC6;"><a href="#&#x9700;&#x8981;&#x4EC0;&#x4E48;&#x77E5;&#x8BC6;" class="headerlink" title="&#x9700;&#x8981;&#x4EC0;&#x4E48;&#x77E5;&#x8BC6;"></a>&#x9700;&#x8981;&#x4EC0;&#x4E48;&#x77E5;&#x8BC6;</h2><ul>
@@ -308,7 +308,7 @@
 
     <span class="post-tags">
       <i class="icon-tags"></i>
-        <a href="/tags/Coursera/">Coursera</a><a href="/tags/机器学习/">机器学习</a><a href="/tags/线性回归/">线性回归</a><a href="/tags/逻辑回归/">逻辑回归</a>
+        <a href="/tags/机器学习/">机器学习</a><a href="/tags/Coursera/">Coursera</a><a href="/tags/线性回归/">线性回归</a><a href="/tags/逻辑回归/">逻辑回归</a>
     </span>
     
 
@@ -325,9 +325,9 @@
   <p class="site-info">
     Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
     Theme by <a href="https://github.com/kawaiiQ/kawaiiHacker" target="_blank">kawaiiHacker</a>
-    </br>
+    <br>
     
-    &copy; 2018 _kawaiiQ
+    &copy; 2019 _kawaiiQ
     
   </p>
 </footer>
@@ -351,12 +351,11 @@
     }
   });
 </script>
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
 
   </div>
-</div>
+</div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
